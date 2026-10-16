@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#090f19">
+  <meta name="description" content="AEGIS-UAV: demonstrador auditável de admissibilidade de taxa em enlaces para missões com drones. Pesquisa-base IECON 2026.">
+  <title>AEGIS-UAV | Mission Intelligence</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://unpkg.com"><link rel="preconnect" href="https://tile.openstreetmap.org">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script defer src="missions.js"></script>
+  <script defer src="data/iecon_replay.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+ <div class="app-shell">
+  <aside class="sidebar">
+    <div class="identity"><div class="symbol">△<span>⌁</span></div><div><b>AEGIS<span>UAV</span></b><small>MISSION INTELLIGENCE</small></div></div>
+    <div class="sidebar-caption">WORKSPACE</div>
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#overview" class="navitem active"><span>▦</span> Mission Control</a>
+      <a href="#laboratory" class="navitem"><span>◎</span> Decision Engine</a>
+      <a href="#evidence" class="navitem"><span>▥</span> Scientific Evidence</a>
+      <a href="#audit" class="navitem"><span>≡</span> Audit & Exports</a>
+    </nav>
+    <div class="side-bottom">
+      <div class="status-card"><i class="led"></i><div><b>Modelo operacional</b><small>Simulação local, sem voo real</small></div></div>
+      <div class="buildline">AEGIS-UAV / v5.0<br>IECON 2026 • APTEL 2026</div>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div class="breadcrumbs"><span>AEGIS-UAV</span><span class="sep">/</span><b>Mission Control</b></div>
+      <div class="top-actions"><span class="meta-pill"><i class="led"></i> SIMULAÇÃO LOCAL</span><span class="meta-pill soft">MODELO AUDITÁVEL</span><button id="quickReport" class="primary-btn">↓ Exportar auditoria</button></div>
+    </header>
+    <section class="hero" id="overview">
+      <div><div class="eyebrow">MISSION OPERATIONS / RADIO ADMISSION</div><h1>Mission Control <span>/</span> Decision Lab</h1><p>Decisões de comunicação orientadas ao serviço para missões multi-UAV. Do requisito técnico à classificação rastreável.</p></div>
+      <div class="hero-right"><b id="missionClock">T + 03:45</b><span>SIMULAÇÃO DEMONSTRATIVA</span></div>
+    </section>
+    <section class="mission-selector"><div class="mission-select-left"><label for="missionSelect">CENÁRIO DE MISSÃO</label><select id="missionSelect"><option value="4" selected>00 · IECON 2026 · 1.806 avaliações reproduzidas</option><option value="0">01 · Inspeção de infraestrutura · Rio</option><option value="1">02 · Monitoramento costeiro · Guanabara</option><option value="2">03 · Busca e resposta · Niterói</option><option value="3">04 · Mapeamento urbano · São Gonçalo</option></select><span id="missionDescription"></span></div><div class="mission-tools"><button id="waypointMode" class="outline-btn">＋ Adicionar waypoint</button><button id="geojsonBtn" class="outline-btn">↓ Plano GeoJSON</button></div></section>
+    <div class="disclaimer"><span class="info-icon">i</span><span><b id="dataModeLabel">IECON 2026 · geometria esquemática modelada</b> <span id="dataModeDetail">SNR contínuo reproduzido dos 1.806 registros do pacote MATLAB fornecido. OpenStreetMap é apenas fundo cartográfico: a geometria não corresponde a localizações reais de voo. Não há telemetria ao vivo.</span></span></div>
+    <section class="dashboard-grid" aria-label="Painel operacional">
+      <article class="panel map-panel"><div class="panel-head"><h2><span class="panel-icon">⌖</span> Active Drone Map</h2><span class="panel-label">OpenStreetMap · 5 cenários</span></div><div class="map-area"><div id="liveMap" class="map-canvas" role="img" aria-label="Mapa ilustrativo de posições e trajetórias simuladas de seis drones"></div><svg id="fallbackMap" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><div class="map-shade"></div><div class="map-control-list" id="droneChips"></div><span class="map-attribution" id="mapAttr">Mapa ilustrativo local · OSM quando disponível</span><div class="map-zoom"><button id="zoomIn" aria-label="Ampliar mapa">+</button><button id="zoomOut" aria-label="Reduzir mapa">−</button></div></div></article>
+      <article class="panel paths-panel"><div class="panel-head"><h2><span class="panel-icon">⌁</span> Flight Paths & Link Quality</h2><span class="panel-label">seis trajetórias modeladas</span></div><div class="path-body"><canvas id="pathChart" aria-label="Curvas sintéticas de SNR por UAV em função do tempo"></canvas><div class="chart-key" id="pathLegend"></div><div class="chart-foot"><span>Tempo da missão (s)</span><span>Variável exibida: SNR (dB)</span></div></div></article>
+      <article class="panel telemetry-panel"><div class="panel-head"><h2><span class="panel-icon">▥</span> Telemetry Snapshot</h2><span class="panel-label">modelo · não é telemetria</span></div><div class="metrics-grid">
+          <div class="metric"><label>△ Distância à base</label><div class="metric-number"><strong id="rangeMetric">—</strong><span>m</span></div><div class="progress"><i id="rangeMeter"></i></div></div>
+          <div class="metric"><label>◉ Link SNR</label><div class="metric-number"><strong id="snrMetric">—</strong><span>dB</span></div><div class="progress"><i id="snrMeter"></i></div></div>
+          <div class="metric"><label>◷ Tempo simulado</label><div class="metric-number"><strong id="timeMetric">—</strong><span>s</span></div><div class="progress"><i id="timeMeter"></i></div></div>
+          <div class="metric"><label>▣ Serviços admissíveis</label><div class="metric-number"><strong id="admittedMetric">—</strong><span>/ 4</span></div><div class="progress"><i id="admittedMeter"></i></div></div>
+        </div></article>
+      <article class="panel mission-panel"><div class="panel-head"><h2><span class="panel-icon">▤</span> Mission Status</h2><span class="panel-label">perfis avaliados</span></div><div class="stacked-list" id="missionStatus"></div></article>
+      <article class="panel fleet-panel"><div class="panel-head"><h2><span class="panel-icon">▦</span> Fleet Overview</h2><span class="panel-label">visão instantânea</span></div><div class="fleet-tiles"><div><b>06</b><span>UAVs modelados</span><i></i></div><div><b id="fleetAdmitted">—</b><span>aptos para vídeo VLOS</span><i></i></div><div><b id="fleetStrict">—</b><span>aptos para vídeo N-VLOS</span><i></i></div><div><b id="fleetWarnings">—</b><span>com alerta de limiar</span><i class="warning"></i></div></div></article>
+      <article class="panel alerts-panel"><div class="panel-head"><h2><span class="panel-icon">⚠</span> Risk & Alerts</h2><span class="panel-label" id="alertCount">0 alertas</span></div><div id="alertList" class="alert-list"></div></article>
+    </section>
+    <section class="lower-grid" id="laboratory">
+      <article class="panel lab-panel"><div class="panel-head"><h2><span class="panel-icon">◎</span> Admission Policy Lab</h2><span class="panel-label">controles conectados ao motor</span></div><div class="panel-body"><div class="control-grid">
+        <label>UAV selecionado <select id="droneSelect" aria-label="Selecionar UAV"><option value="0">UAV A1</option><option value="1">UAV B3</option><option value="2">UAV C2</option><option value="3">UAV D4</option><option value="4">UAV E5</option><option value="5">UAV F6</option></select></label>
+        <label>Condição de propagação <select id="scenarioSelect"><option value="0">Perda livre · referência</option><option value="3">Obstrução ilustrativa · +3 dB</option><option value="6">Obstrução ilustrativa · +6 dB</option><option value="10">Obstrução ilustrativa · +10 dB</option></select></label>
+        <label class="wide">Instante <output id="timeLabel">225 s</output><input id="timeSlider" type="range" min="0" max="300" step="1" value="225"></label>
+        <label>Margem <output id="marginLabel">0 dB</output><input id="marginSlider" type="range" min="0" max="3" step="0.25" value="0"></label>
+        <label>Perturbação do limiar <output id="deltaLabel">0 dB</output><input id="deltaSlider" type="range" min="-1" max="1" step="0.25" value="0"></label>
+      </div><div class="data-import"><label for="matlabCsv">◫ Importar séries externas (CSV)</label><input type="file" id="matlabCsv" accept=".csv,text/csv"><span id="importStatus">Modo IECON · 1.806 posições modeladas do pacote MATLAB · SNR contínuo</span><button id="clearCsv" type="button" class="outline-btn small">Limpar CSV</button></div><div class="model-option"><label><input id="legacyRounding" type="checkbox"> Comparar arredondamento legado do MATLAB (diagnóstico)</label><span id="roundingInfo">Referência primária: SNR contínuo, sem arredondamento.</span></div><div class="control-actions"><button id="playBtn" class="primary-btn">▶ Reproduzir missão</button><button id="resetBtn" class="outline-btn">↻ Restaurar</button><button id="compareBtn" class="outline-btn">↔ Comparar</button></div><div class="service-decision-head"><b>Perfil / taxa exigida</b><b>Uniforme</b><b>Por serviço</b></div><div id="serviceDecisions" class="service-decisions"></div></div></article>
+      <article class="panel comparison-panel"><div class="panel-head"><h2><span class="panel-icon">▥</span> Policy Comparison</h2><span class="panel-label">mesmo SNR, limiares distintos</span></div><div class="panel-body"><div class="chart-key"><span><i class="swatch orange"></i> Uniforme</span><span><i class="swatch teal"></i> Orientada ao serviço</span></div><canvas id="policyChart" aria-label="Comparação das decisões binárias de admissão"></canvas><div class="explain-box" id="decisionExplanation"></div><div class="tiny-legend">Classificação de taxa, não desempenho de pacotes ou qualidade de serviço ponta a ponta.</div></div></article>
+      <article class="panel kpi-panel" id="evidence"><div class="panel-head"><h2><span class="panel-icon">◈</span> Scientific Evidence</h2><span class="panel-label">IECON 2026 · manuscrito</span></div><div class="evidence-grid"><div><strong>1.806</strong><span>amostras pareadas de enlace-posição</span></div><div><strong>244</strong><span>rejeições conservadoras evitadas por perfil menos exigente</span></div><div><strong>+13,51</strong><span>pontos percentuais no cenário principal</span></div><div><strong>0,00</strong><span>ganho do perfil mais exigente por construção</span></div></div><div class="evidence-foot"><b>86,49% → 100,00%</b><span>Resultado classificado para os 3 serviços menos exigentes, no cenário principal.</span></div><div class="evidence-note">Reprodução verificada a partir das coordenadas esquemáticas incluídas no pacote MATLAB; seus valores coincidem com o artigo revisado. Os demais cenários usam geometria sintética distinta.</div></article>
+    </section>
+    <section class="deep-grid" id="audit">
+      <article class="panel audit-panel"><div class="panel-head"><h2><span class="panel-icon">≡</span> Mission Decision Audit</h2><span class="panel-label">rastreabilidade por serviço</span></div><div class="panel-body"><div class="table-scroll"><table><thead><tr><th>Serviço</th><th>Taxa</th><th>Limiar individual</th><th>Uniforme</th><th>Por serviço</th><th>Interpretação</th></tr></thead><tbody id="auditRows"></tbody></table></div><div class="control-actions"><button id="jsonBtn" class="outline-btn">↓ Registro JSON</button><button id="csvBtn" class="outline-btn">↓ Instante CSV</button><button id="seriesBtn" class="outline-btn">↓ Trajetórias CSV</button><button id="printBtn" class="outline-btn">⎙ Imprimir</button></div></div></article>
+      <article class="panel method-panel"><div class="panel-head"><h2><span class="panel-icon">⊡</span> Engineering Notes</h2><span class="panel-label">reprodutibilidade</span></div><div class="panel-body notes"><p><b>Parâmetros-base.</b> 3,410 GHz · 1,4 MHz · potência 10 dBm · ganhos 10/2 dBi · ruído −90 dBm.</p><p><b>Admissão.</b> Um fluxo passa quando SNR ≥ limiar do serviço + perturbação + margem. O controle usa 14,1 dB para todos.</p><p><b>Perfis.</b> C2: −6,7 dB; vídeo VLOS: 5,9 dB; vídeo N-VLOS: 14,1 dB.</p><p><b>Reprodução IECON.</b> O modo inicial carrega 1.806 posições esquemáticas da base MATLAB V5 fornecida e recalcula SNR contínuo: 1.562 admissões com limiar de 14,1 dB, contra 1.581 quando se aplica arredondamento legado. Nenhum deles é resultado de voo físico. Os mapas usam âncora geográfica ilustrativa, sem coordenadas de campo. Veja <a href="data/iecon_replay_provenance.json" target="_blank" rel="noopener">proveniência e checksums</a>.</p><p><b>Integração MATLAB.</b> Execute <code>matlab/reproduce_iecon_results.m</code> para recomputar a série a partir do CSV de geometria, ou gere um cenário pelo script <code>matlab/aegis_uav_simulate.m</code> ou importe registros com as colunas <code>uav,time_s,x_m,y_m</code> e <code>snr_db</code> opcional. A importação é local e não comprova validação do modelo, mesmo quando contém medidas externas.</p><p><b>Limitação.</b> Sem SINR/interferência, protocolo, PDR, latência ou voo físico. As trajetórias são esquemáticas ou sintéticas. A visualização geográfica não é evidência de cobertura de rádio nem trajeto autorizado.</p><a href="docs/AEGIS_UAV_Relatorio_Tecnico_2026.pdf" target="_blank" rel="noopener">↗ Artigo técnico (PDF)</a></div></article>
+    </section>
+    <footer><span>AEGIS-UAV · Protótipo individual de demonstração</span><span>Base científica com coautoria: IECON 2026 · <a href="https://github.com/Whatisthetimeac/AEGIS-UAV" target="_blank" rel="noopener">Código e documentação ↗</a></span></footer>
+  </main>
+ </div>
+ <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

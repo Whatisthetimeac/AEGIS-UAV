@@ -1,40 +1,52 @@
-# AEGIS-UAV — Mission-Aware Link Intelligence
+# AEGIS-UAV | Mission-aware Link Admission
 
-**Dashboard demonstrativo de apoio à decisão sobre admissibilidade de taxa em missões UAV**, preparado para o Prêmio Inovar APTEL 2026.
+**Ferramenta pública de demonstração científica para avaliação auditável de admissibilidade de taxa em missões UAV.**
 
-**[Abrir sistema](https://whatisthetimeac.github.io/AEGIS-UAV/)** · **[Ler artigo técnico](https://whatisthetimeac.github.io/AEGIS-UAV/docs/nota-tecnica.html)** · **[Código-fonte](index.html)**
+[**Abrir o dashboard**](https://whatisthetimeac.github.io/AEGIS-UAV/) · [**Ler artigo técnico (PDF)**](docs/AEGIS_UAV_Relatorio_Tecnico_2026.pdf) · [**Ler proveniência dos dados**](data/iecon_replay_provenance.json)
 
-> O GitHub Pages precisa estar habilitado em **Settings → Pages → Deploy from a branch → main / (root)**. Enquanto não estiver ativo, abra o arquivo `index.html` localmente.
+## O que funciona
 
-## Funcionalidades implementadas
+- Visualização de **1.806 avaliações modeladas** de seis UAVs, com 301 instantes e valores de SNR contínuo reconciliados com a versão revisada do IECON 2026.
+- Comparação de duas políticas: controle uniforme (14,1 dB para todos) e limiares por serviço (`-6,7`, `5,9` e `14,1 dB`).
+- Alternância opcional do **arredondamento legado** para explicar a diferença entre **1.562** e **1.581** posições classificadas como admissíveis pelo controle uniforme.
+- Quatro cenários *hipotéticos*: inspeção, monitoramento costeiro, busca/resposta e mapeamento urbano, cada um com geometria sintética distinta.
+- Fundo cartográfico OpenStreetMap quando a conexão permite; waypoint e trajetória do estudo **não são geolocalizações de voo físico**.
+- Edição de waypoints de planejamento, comparação, importação CSV, reprodução temporal, gráfico SNR e exportações GeoJSON, JSON e CSV.
 
-- Layout escuro e responsivo em desktop e celular, com mapa esquemático e seis trajetórias **sintéticas**;
-- cálculo de SNR com orçamento de enlace em espaço livre sob parâmetros científicos do artigo;
-- avaliação de quatro perfis: C2 waypoint, C2 comando direto, vídeo VLOS e vídeo N-VLOS;
-- comparação entre baseline uniforme conservador e política diferenciada por serviço;
-- ajustes de perda, perturbação e margem, animação temporal, alertas sintéticos;
-- exportação de auditoria em JSON, CSV instantâneo e CSV para todas as trajetórias;
-- resultados do artigo IECON exibidos **separadamente** da simulação ilustrativa do navegador.
+## A evidência principal
 
-## Evidência científica do IECON
+| Métrica do cenário principal IECON | Resultado |
+|---|---:|
+| Avaliações pareadas modeladas | 1.806 |
+| Uniforme, SNR contínuo, 14,1 dB | 1.562 / 1.806 = 86,49% |
+| Política por serviço em três perfis menos exigentes | 1.806 / 1.806 = 100,00% |
+| Diferença em cada perfil menos exigente | +13,51 p.p. |
+| Rejeições conservadoras evitadas **por perfil** | 244 |
+| Uniforme com arredondamento legado | 1.581 / 1.806 = 87,54% |
+| Serviço mais exigente: diferença entre políticas | 0 p.p. |
 
-A pesquisa *From Uniform Thresholds to Service-Aware Link Admission in UAV Missions: A Reproducible MATLAB Study* (aceita no IECON 2026, pesquisa de coautoria) registrou **1.806** avaliações pareadas. O baseline uniforme aceitou **1.562 (86,49%)** e a classificação por serviço **1.806 (100%)** para três perfis menos exigentes no cenário principal, diferença de **13,51 pontos percentuais** e **244 rejeições conservadoras evitadas por perfil**. O perfil mais exigente N-VLOS não mudou. Os números não foram gerados pelo dashboard público.
+Os números **não** demonstram PDR, latência, confiabilidade, sucesso de missão, economia econômica ou segurança de voo. O baseline uniforme é deliberadamente conservador e não representa todo sistema de QoS do mercado.
 
-## Limitações
+## Executar sem instalar
 
-Este é um **demonstrador de admissibilidade de taxa**, não uma central de telemetria nem controlador de voo. Nenhum resultado de latência, entrega de pacotes (PDR), confiabilidade, economia econômica ou segurança de voo é reivindicado. Trajetórias de dashboard são sintéticas. O baseline uniforme é intencionalmente conservador.
+A raiz possui um `index.html` autossuficiente (estilos, lógica e dados primários incorporados). Basta abri-lo no navegador. A pasta `src/` mantém os arquivos separados de desenvolvimento. O mapa pode exigir conexão externa.
 
-## Qualidade
+## MATLAB e reprodutibilidade
 
-A interface foi exercitada em Chromium: cenário inicial SNR **12,17 dB / 3 de 4** perfis, com perda sintética adicional de 10 dB SNR **2,17 dB / 2 de 4** perfis; animação, seleção, margem, reset e exportação JSON operaram sem erros JavaScript. Layout testado a 1440 px e 390 px sem overflow horizontal.
+Acesse [`matlab/README.md`](matlab/README.md) para reproduzir no MATLAB os 1.806 pontos modelados do pacote fornecido e para gerar quatro missões sintéticas independentes. O GitHub Pages **não** executa MATLAB; os resultados do script são exportados e consumidos pelo navegador.
 
-## Publicar site
+Arquivos principais:
 
-1. Repositório **Public**;
-2. **Settings → Pages**;
-3. **Deploy from a branch → main → /(root) → Save**;
-4. Aguarde confirmação **Your site is live at...**.
+- [`data/iecon_model_replay_1806.csv`](data/iecon_model_replay_1806.csv): coordenadas locais e SNR contínuo modelado.
+- [`data/iecon_replay_provenance.json`](data/iecon_replay_provenance.json): origem, SHA-256 e limitações.
+- [`matlab/reproduce_iecon_results.m`](matlab/reproduce_iecon_results.m): auditoria das decisões e do arredondamento, proposta para execução local.
+- [`src/`](src/): HTML, CSS, JavaScript e tabela embutida de replay.
+- [`docs/AEGIS_UAV_Relatorio_Tecnico_2026.pdf`](docs/AEGIS_UAV_Relatorio_Tecnico_2026.pdf): nota científica detalhada.
 
-## Autoria
+## Limitações e ética científica
 
-Protótipo de candidatura individual de **Ana Clara da Silva Teixeira**. A pesquisa IECON de base mantém os créditos de seus coautores e a titularidade de dados e códigos preexistentes.
+Conjunto de dados **modelado/sintético**; sem georreferenciamento real dos voos, medidas de SNR em campo, interferência calibrada, MAC, latência, PDR ou conformidade aeronáutica comprovada. Importar CSV não prova procedência externa. Autor(a) do demonstrador de competição: Ana Clara da Silva Teixeira. **O artigo IECON de origem é coautorado e seus créditos não são substituídos por este protótipo.**
+
+## Licenças e atribuição
+
+Cartografia: © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). O dataset derivado contém somente geometria e cálculo de enlace do pacote fornecido pela equipe, sem geolocalização de campo. Reutilização de código preexistente, dados externos e direito autoral do manuscrito sujeito às respectivas autorizações.

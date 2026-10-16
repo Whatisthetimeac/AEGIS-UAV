@@ -1,0 +1,15 @@
+{
+  "source_package": "Simulação drones e rádio Lora.zip",
+  "source_member": "SBR_MATLAB_SERVICE_AWARE_EVIDENCE_V5/SBR_MATLAB_SERVICE_AWARE_EVIDENCE_V5/output/results/scenario_B_ground_links.csv",
+  "source_member_sha256": "028f8dcd561448091bcedb430480fa1381bb899b8f40c3faf74979c8b8e9faca",
+  "replay_csv_sha256": "045707a6ce467e19a73e8c45d26c2bc3dec2da855cc6cae1c1503f87028e889b",
+  "method": "snr_db=10+10+2 - fspl_db -(-90); fspl_db from V5 ground links x/y and altitude; no rounded received-power",
+  "model": "AERPAW LTE ground-to-air, 3.410 GHz, 1.4 MHz",
+  "n_samples": 1806,
+  "n_uniform_continuous": 1562,
+  "n_legacy_rounded": 1581,
+  "n_mapped_lower_rate": 1806,
+  "not_field_data": true,
+  "not_geolocated": true,
+  "matlab_ran_in_this_session": false
+}

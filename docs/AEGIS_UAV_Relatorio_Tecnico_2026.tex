@@ -1,0 +1,175 @@
+\documentclass[10pt,a4paper,twocolumn]{article}
+\usepackage[margin=1.65cm,top=1.9cm,bottom=1.8cm,columnsep=0.66cm]{geometry}
+\usepackage{fontspec}
+\setmainfont{Lato}
+\setsansfont{Lato}
+\usepackage{amsmath,amssymb,booktabs,array,graphicx,microtype,enumitem,caption,float}
+\usepackage[table]{xcolor}
+\definecolor{aegis}{HTML}{0E7779}
+\definecolor{aegisdark}{HTML}{0F2638}
+\definecolor{aegislight}{HTML}{EAF4F4}
+\definecolor{slate}{HTML}{4C5F6B}
+\usepackage[colorlinks=true,urlcolor=aegis,linkcolor=aegis,citecolor=aegis]{hyperref}
+\usepackage{titlesec}
+\titleformat{\section}{\sffamily\bfseries\color{aegisdark}\large}{\thesection.}{0.55em}{}
+\titleformat{\subsection}{\sffamily\bfseries\color{aegis}\normalsize}{\thesubsection.}{0.45em}{}
+\titlespacing*{\section}{0pt}{12pt}{5pt}
+\titlespacing*{\subsection}{0pt}{8pt}{3pt}
+\usepackage{fancyhdr}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\sffamily\color{aegis} AEGIS-UAV \quad / \quad NOTA TÉCNICA 2026}
+\fancyhead[R]{\small\sffamily\color{slate} IECON 2026 \quad\textbullet\quad APTEL}
+\fancyfoot[L]{\scriptsize\color{slate} Protótipo de pesquisa; sem validação física}
+\fancyfoot[R]{\scriptsize\color{slate} \thepage}
+\renewcommand{\headrulewidth}{0.35pt}
+\captionsetup{font=small,labelfont={bf,color=aegis},labelsep=period,skip=4pt}
+\setlist[itemize]{leftmargin=*,itemsep=1pt,topsep=2pt}
+\setlength{\parindent}{0.85em}\setlength{\parskip}{0pt}
+\begin{document}
+\twocolumn[{
+\begin{minipage}{\textwidth}
+\vspace*{-0.6cm}
+{\color{aegis}\sffamily\bfseries\small DOSSIÊ CIENTÍFICO E TECNOLÓGICO \quad / \quad PRÊMIO INOVAR APTEL 2026}\\[7pt]
+{\color{aegisdark}\sffamily\bfseries\fontsize{20}{23}\selectfont AEGIS-UAV: avaliação auditável de enlaces orientada aos requisitos de missões com múltiplos drones}\\[4pt]
+{\fontsize{11}{14}\selectfont\color{slate} \textit{Mission-Aware Link Admission and Decision-Support Demonstrator}}\\[9pt]
+{\sffamily\bfseries Ana Clara da Silva Teixeira} \quad | \quad Instituto Militar de Engenharia (IME), Brasil\\[2pt]
+\href{mailto:clara.silva@ime.eb.br}{clara.silva@ime.eb.br} \quad\textbullet\quad \href{https://github.com/Whatisthetimeac/AEGIS-UAV}{Repositório e código} \quad\textbullet\quad \href{https://whatisthetimeac.github.io/AEGIS-UAV/}{Dashboard interativo}\\[4pt]
+{\color{slate}\footnotesize Versão técnica 5.0 · 16 out. 2026 · Artefato de candidatura individual derivado de pesquisa IECON com coautores. A ferramenta não representa produto certificado nem voo operacional.}\\[9pt]
+\colorbox{aegislight}{\parbox{\dimexpr\textwidth-2\fboxsep}{\small\textbf{Resumo.} Em missões com UAVs, tráfego de comando e controle (C2) e vídeo exige taxas heterogêneas. Uma política de admissão que aplica indistintamente o limiar necessário ao serviço de maior taxa pode rejeitar enlaces suficientes para serviços de menor taxa. O AEGIS-UAV traduz requisitos padronizados em limiares de uma abstração publicada de SNR e eficiência espectral, compara políticas sob o mesmo orçamento de enlace e disponibiliza um painel com decisões explicáveis, rastreamento de cenários e exportações auditáveis. A partir de 1.806 posições esquemáticas fornecidas em pacote MATLAB, recalculamos SNR contínuo: 1.562 posições (86,49\%) são classificadas como admissíveis pelo controle uniforme, ao passo que três perfis menos exigentes alcançam 1.806 posições (100\%), diferença de 13,51 pontos percentuais e 244 rejeições conservadoras evitadas por perfil. O resultado de 1.581 admissões (87,54\%) de pacote anterior é reproduzido com o arredondamento legado e não é confundido com o resultado principal. O demonstrador oferece ainda quatro missões sintéticas sobre cartografia real, sem atribuir a elas medições ou voos efetivos. O método quantifica \emph{admissibilidade de taxa modelada}, não PDR, latência, confiabilidade, economia comprovada ou segurança operacional.}}\\[8pt]
+\textbf{Palavras-chave:} comunicação UAV; admissão por serviço; rastreabilidade; análise de enlace; simulação MATLAB; infraestrutura crítica.\\[10pt]
+\rule{\textwidth}{0.7pt}\vspace{7pt}
+\end{minipage}
+}]
+\section{Problema e motivação}
+A transmissão entre UAVs e estações terrestres envolve fluxos de natureza distinta. Mensagens de C2 usualmente demandam taxas baixas, enquanto payloads de vídeo podem requerer megabits por segundo. Quando se adota uma decisão uniforme baseada no maior requisito, um enlace pode ser considerado inadequado ao conjunto inteiro ainda que suporte uma tarefa menos exigente. Essa diferença tem potencial importância no \emph{planejamento} de inspeções de infraestruturas críticas, sem comprovar, por si só, vantagem de confiabilidade ou segurança.
+
+O projeto responde à pergunta: \emph{quanto uma política conservadora de limiar único modifica a classificação de admissibilidade quando comparada, sob as mesmas condições de rádio, a uma política que mapeia os requisitos de cada serviço?} Essa comparação é relevante para telecomunicações, automação e gerenciamento técnico de missões.
+
+É indispensável qualificar o controle utilizado: o limiar uniforme é um \textbf{baseline conservador definido para o estudo}, não uma prática universal de redes celulares, onde mecanismos de QoS podem diferenciar classes de serviço. A originalidade não está na desigualdade óbvia entre limiares aninhados, mas na rastreabilidade dos requisitos, na quantificação do efeito sob condições controladas, na análise de sensibilidade e no artefato auditável.
+
+\section{Contribuição e posicionamento}
+O AEGIS-UAV realiza três funções complementares: (i) classifica admissibilidade \emph{de taxa} com limiares por serviço; (ii) torna a decisão auditável ao mostrar SNR, parâmetros e limiares; e (iii) oferece uma interface de exploração de cenários, exportação de dados e passagem para validação posterior com observações físicas retidas.
+
+Não propomos um novo modem, um controlador de voo, uma rede mesh validada ou um sistema que aumente fisicamente a potência do sinal. A solução é uma ferramenta de \textbf{apoio à decisão de engenharia}; não é classificador treinado por aprendizado de máquina. O termo ``inteligente'' refere-se à contextualização das regras por serviço, e não a uso demonstrado de IA.
+
+\section{Fundamentação técnica}
+\subsection{Perfis e critérios}
+A taxa de aplicação requerida pelo serviço $s$ é $r_s$, e a largura de banda modelada é $B=1{,}4\,\mathrm{MHz}$. Para cada nível $k$ de uma tabela publicada de eficiência espectral $\eta_k$ e limiar $\tau_k$, a taxa nominal suportada na abstração é $R_k=B\eta_k$. O menor nível compatível com a taxa do serviço é
+\begin{equation}
+k_s=\min\{k\mid B\eta_k\geq r_s\}.
+\end{equation}
+A Tabela~\ref{tab:serv} mostra os quatro perfis empregados. Os requisitos de prazo e confiabilidade podem caracterizar os perfis de origem, mas \textbf{não são testados pelo classificador}.
+\begin{table}[H]\centering\small\caption{Perfis de referência e limiares de taxa.}\label{tab:serv}\begin{tabular}{@{}lrr@{}}\toprule Serviço & Taxa & $\tau_{k_s}$ (dB)\\\midrule
+C2 waypoint & 0,8 kbit/s & $-6{,}7$\\
+C2 direct-stick & 4,8 kbit/s & $-6{,}7$\\
+Vídeo VLOS & 2,0 Mbit/s & $5{,}9$\\
+Vídeo N-VLOS & 4,0 Mbit/s & $14{,}1$\\\bottomrule\end{tabular}\end{table}
+\subsection{Orçamento de enlace}
+Com distância $d_i$ em metros e frequência $f$ em hertz, emprega-se perda em espaço livre (FSPL):
+\begin{equation}
+L_i=20\log_{10}(d_i)+20\log_{10}(f)-147{,}55.
+\end{equation}
+O SNR contínuo em dB é calculado pelo orçamento:
+\begin{equation}
+\gamma_i=P_{tx}+G_{tx}+G_{rx}-L_i-N,
+\end{equation}
+com $P_{tx}=10\,\mathrm{dBm}$, $G_{tx}=10\,\mathrm{dBi}$, $G_{rx}=2\,\mathrm{dBi}$, $N=-90\,\mathrm{dBm}$ e $f=3{,}410\,\mathrm{GHz}$. Essas escolhas seguem o perfil de rádio registrado no estudo de origem, não representam medições locais de enlace em campos do Rio.
+
+A política específica por serviço decide
+\begin{equation}
+A^{map}_{i,s}=\mathbf{1}[\gamma_i\geq \tau_{k_s}+\delta+m],
+\end{equation}
+e a política conservadora uniforme decide
+\begin{equation}
+A^{uni}_{i,s}=\mathbf{1}[\gamma_i\geq \tau_{k_{max}}+\delta+m].
+\end{equation}
+Aqui $\delta$ é perturbação de limiar e $m$ é margem em dB. O maior perfil usa $\tau_{k_{max}}=14{,}1\,\mathrm{dB}$. Uma decisão $A=1$ significa apenas compatibilidade de taxa \emph{sob a abstração escolhida}.
+
+\section{Dados e cadeia de proveniência}
+O material fornecido contém código MATLAB, registros de parâmetros e tabelas de um pacote de simulação orientado a serviços. Para esta reanálise, foi extraída a tabela \texttt{scenario\_B\_ground\_links.csv}, com 1.806 posições modeladas (seis identificadores e 301 instantes). A tabela inclui geometria local $(x,y,z)$ e perda FSPL.
+
+Uma diferença relevante foi identificada: no pacote anterior, o arredondamento da potência recebida produzia uma série de SNR inteira; no artigo IECON revisado, a análise principal retém SNR contínuo. Recalculamos diretamente o SNR a partir de FSPL; depois verificamos ambas as políticas sem alterar geometria, potência ou recursos.
+
+A comparação é pareada: para cada par UAV--instante, a política uniforme e a por serviço recebem o \emph{mesmo SNR}. As 301 posições por UAV são correlacionadas no tempo e não equivalem a 301 voos independentes. Os identificadores e a trajetória não são georreferenciados em relação a uma missão física.
+
+Para auditabilidade, publicamos \texttt{data/iecon\_model\_replay\_1806.csv}, um registro de origem com hashes SHA-256, um script MATLAB de reanálise e um teste independente em Python. A execução do script MATLAB específico desta nova versão \textbf{não ocorreu} neste ambiente; sua aritmética foi conferida independentemente a partir das tabelas fornecidas.
+
+\section{Resultados reproduzidos}
+\begin{table}[H]\centering\small\caption{Comparação correta das versões.}\label{tab:baseline}\begin{tabular}{@{}lrr@{}}\toprule Política/modelagem & Admissões & Taxa (\%)\\\midrule
+Uniforme, SNR contínuo & 1.562 & 86,49\\
+Uniforme, arredondado legado & 1.581 & 87,54\\
+Por serviço, três perfis menores & 1.806 & 100,00\\
+Vídeo N-VLOS em ambas & 1.562 & 86,49\\\bottomrule\end{tabular}\end{table}
+O resultado principal é a diferença \textbf{13,51 pontos percentuais} (244 posições por perfil) entre o controle uniforme contínuo e a decisão por serviço para C2 e vídeo VLOS. O serviço N-VLOS, que estabelece o limiar uniforme, permanece idêntico por construção. Não seria correto somar as 244 posições de cada um dos três perfis como 732 enlaces físicos independentes.
+
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/continuous_vs_rounded.png}\caption{Comparação entre a reanálise de SNR contínuo, o arredondamento legado e o perfil menos exigente. Não é taxa de entrega de pacotes.}\end{figure}
+A decomposição por UAV reforça a heterogeneidade da geometria. O controle contínuo admite 301, 253, 205, 215, 301 e 287 posições para A1, B3, C2, D4, E5 e F6, respectivamente. Os ganhos por trajetória variam entre zero e aproximadamente 31,89 pontos percentuais. Em condições ainda piores, nem a política por serviço é necessariamente admissível.
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/gains_by_uav.png}\caption{Percentuais de admissibilidade no modelo contínuo: mesmo SNR por trajetória e políticas diferenciadas por serviço.}\end{figure}
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/snr_paths.png}\caption{SNR contínuo ao longo das seis trajetórias esquemáticas e limiares de vídeo. Trajetória modelada não equivale a voo.}\end{figure}
+\section{Protótipo e interface operacional}
+O dashboard é implementado em HTML, CSS e JavaScript, com processamento local e hospedagem estática compatível com GitHub Pages. O motor analítico calcula e explica admissão para quatro serviços; o operador pode modificar tempo, veículo, margem, perturbação de limiar e perdas adicionais. Mapa, curvas, cartões de diagnóstico, alertas, tabela e exportações são derivados do mesmo estado de simulação.
+
+A versão 5 oferece cinco modos de trabalho: \textbf{um replay IECON}, baseado nos 1.806 registros reproduzidos, e quatro missões hipotéticas (inspeção de infraestrutura, monitoramento costeiro, busca/resposta e mapeamento urbano). As missões adicionais são produzidas por gerador determinístico; não se confundem com os dados principais. O mapa usa cartografia real do OpenStreetMap \emph{quando o serviço de mapas está acessível}. Entretanto, os caminhos são gerados em coordenadas locais modeladas, projetadas apenas visualmente em uma âncora geográfica aproximada. Portanto, o fundo cartográfico não torna os caminhos georreferenciados ou reais.
+
+O arquivo CSV pode ser importado localmente no navegador, e o sistema aceita exportações JSON, CSV e GeoJSON. Um CSV externo não se torna ``medido'' nem ``validado'' por ter sido importado. A aplicação não usa motor MATLAB executando no navegador; os scripts MATLAB exportam registros que o aplicativo pode consumir.
+
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{figures/dashboard.png}\caption{Captura do dashboard v5 em desktop. No teste sem acesso aos servidores de mapas, é utilizado fundo esquemático; o sistema indica a limitação.}\end{figure}
+\subsection{Testes funcionais da versão 5}
+Foram realizados testes automatizados com Chromium em visões desktop e móvel: inicialização com 1.806 registros, seis drones e quatro serviços; ausência de erros JavaScript; mudança de propagação em +10 dB ocasionando redução de 10 dB em SNR; alternância do controle de arredondamento; troca de missões; exportação GeoJSON e CSV; manutenção de largura responsiva. Os testes reproduzem a \emph{coerência aritmética e de interface}, não verificam o rádio nem desempenho de aeronaves.
+
+\section{Aplicabilidade industrial e valor}
+Em inspeções planejadas de instalações energéticas, parte dos fluxos pode permanecer compatível com seus requisitos de taxa embora o fluxo de vídeo mais exigente não o seja. O AEGIS-UAV permite identificar e documentar essa diferença em um estudo pré-operacional, orientar comparações de configuração e comunicar riscos de forma explicável. Isso \emph{poderia} diminuir avaliações excessivamente conservadoras em cenários específicos; não há medições de redução de custo, autonomia, tempo de trabalho ou número de incidentes.
+
+A escalabilidade exige entradas de rádio adequadas ao cenário, validação independente e integração futura com plataformas de planejamento. Um eventual uso embarcado dependeria de critérios de segurança, confiabilidade, certificação e validação ausentes deste protótipo.
+
+\section{Limitações, riscos e validade}
+A ferramenta atual tem limitações deliberadamente explícitas: \begin{itemize}
+\item A métrica é admissibilidade modelada de \emph{taxa}; não há simulação de filas, MAC, transporte, interferência, SINR calibrado, perdas de pacote ou deadlines.
+\item A geometria de origem é esquemática; os cenários novos são sintéticos. O mapa OSM não representa posição física de voo.
+\item Limiar por serviço e uniforme formam comparações estruturadas; o modelo não refuta soluções QoS já diferenciadas em sistemas comerciais.
+\item Não foi realizado teste de campo, calibração de canal, validação de aeronave ou afirmação de redução real de falhas.
+\item Uma modificação de $m$ ou $\delta$ pode elevar diferenças descritivas sem alterar a capacidade ou a propagação física.
+\end{itemize}
+\section{Roteiro de validação física}
+Propomos uma sequência com critérios verificáveis. \textbf{Etapa 1:} congelar código, limiares e versão de dados, documentando unidade de análise por voo. \textbf{Etapa 2:} coletar traces com identificação de enlace, timestamps e metadados rádio legalmente autorizados. \textbf{Etapa 3:} separar voos completos em treino para eventual calibração e teste retido; nunca misturar posições correlacionadas do mesmo voo entre conjuntos. \textbf{Etapa 4:} medir erro de SNR/RSSI e concordância da decisão; se PDR, latência e perdas estiverem disponíveis, relatá-los como \emph{desfechos independentes}, sem convertê-los indevidamente em propriedades do classificador de taxa. \textbf{Etapa 5:} introduzir interferência e escalonamento em simulador de redes, revisando premissas e cenários; só então avaliar economia e impacto operacional com operadores parceiros.
+
+\section{Conclusão}
+O AEGIS-UAV apresenta uma solução demonstrável de \emph{avaliação auditável} de enlaces por requisitos de serviço. A reconciliação matemática dos dados fornecidos reproduz os resultados revisados do IECON e distingue explicitamente a implementação de SNR contínuo da versão arredondada. O dashboard torna a classificação analisável, exportável e compreensível sem sugerir que o sistema mede telemetria real. Seu potencial é apoiar a transição de estudos teóricos para ferramentas reprodutíveis de engenharia, com validação física como etapa futura indispensável.
+
+\section{Matriz de testes e evidências}
+A Tabela~\ref{tab:evidence} distingue evidências já obtidas de etapas necessárias antes de uma utilização operacional. Essa fronteira limita interpretações exageradas de ``eficiência'' ou ``resiliência'' a partir de uma classificação matemática.
+\begin{table}[H]\centering\scriptsize\caption{Maturidade das evidências do projeto.}\label{tab:evidence}\begin{tabular}{@{}p{2.7cm}p{2.15cm}p{2.3cm}@{}}\toprule Elemento & Estado em 2026 & Próxima prova\\\midrule
+Decisão por serviço & Reproduzida, 1.806 pontos & Repetição em outros perfis\\
+UI responsiva & Teste local automatizado & Teste de usuários\\
+Mapas & Base cartográfica real condicional & Waypoints georreferenciados\\
+Canal rádio & FSPL, cenário noise-limited & SINR e canal calibrado\\
+SNR medido & Não disponível & Calibração por voo\\
+PDR / latência & Não medidos & Avaliação em tráfego real\\
+Economia & Potencial apenas & Ensaio operacional com custos\\\bottomrule\end{tabular}\end{table}
+\subsection{Invariantes de consistência}
+Qualquer implementação futura deverá preservar os seguintes testes: (a) a mesma amostra de SNR em ambas as políticas; (b) igualdade entre políticas para o perfil mais exigente; (c) monotonicidade, pois $\tau_{k_s}\leq \tau_{k_{max}}$; (d) consistência entre os registros exportados e os números exibidos; (e) rastreabilidade de alterações nos parâmetros; e (f) rotulagem obrigatória de dados sintéticos, medidos e importados sem validação. Esses testes não tornam a abstração física completa, mas previnem regressões de implementação.
+
+\section{Casos de aplicação e interface}
+O caso de \textbf{inspeção de infraestrutura} usa um corredor de referência hipotético e diferentes perfis de tráfego durante deslocamentos modelados. O propósito é reconhecer quando a condição de rádio representada cruza limiares, não avaliar um corredor elétrico real. Na missão de \textbf{monitoramento costeiro}, a variação de geometria permite explorar diferenças de classificação sob configurações inalteradas. A missão de \textbf{busca e resposta} serve para discutir precedência de fluxos críticos, mas o aplicativo não decide uma ação de salvamento nem garante o atendimento a deadlines. Por fim, \textbf{mapeamento urbano} examina a sensibilidade dos requisitos de vídeo frente a obstáculos representados por perdas adicionais simples, não por um modelo urbano validado.
+
+O dashboard reúne mapa, posições, curvas temporais, métricas, estados dos quatro serviços, alertas de ultrapassagem de limiar, parâmetros, tabela de decisão e exportações. O mesmo mecanismo associa a interpretação textual a cada decisão. Tal arranjo diminui a ambiguidade de uma tabela de limiares isolada, embora a qualidade dessa visualização ainda deva ser submetida a testes de usabilidade com engenheiros e operadores.
+
+\section{Reprodução independente do resultado}
+Ao contrário de uma comparação que só apresenta porcentagens, a versão 5 disponibiliza sua evidência primária em um CSV numérico. O script de auditoria lê a geometria de 1.806 linhas e recalcula, para cada posição, $d_i$, $L_i$ e $\gamma_i$. Aplica o limiar uniforme de $14{,}1$ dB a todos os serviços e os limiares específicos da Tabela~\ref{tab:serv} aos perfis individuais. O total uniforme \textbf{1.562} resulta da condição $\gamma_i\geq 14{,}1$ sem arredondamento. A aplicação do operador $\lceil\gamma_i\rceil$ reproduz o controle antigo \textbf{1.581}. Essa reconciliação é especialmente importante porque uma banca poderia interpretar a diferença de 19 posições como inconsistência científica caso as versões fossem misturadas.
+
+Na exportação do painel, cada registro identifica o modo de origem, o tempo, o UAV, coordenadas locais, parâmetros de perda e a decisão correspondente. O aplicativo permite importar arquivos de terceiros, mas não certifica sua origem: para usar esses dados cientificamente, devem ser associados a um plano de coleta, unidades, versões, checksums e documentação sobre sensores e calibração.
+
+\subsection{Riscos de operacionalização}
+Um classificador rate-only pode admitir uma comunicação cujo atraso ou taxa de erro seja inaceitável. Se for empregado indevidamente como critério automático de autorização de voo, criará risco de falsa confiança. Por isso, o AEGIS-UAV não emite permissões de voo, não transmite comandos, não determina distâncias regulamentares e não pretende substituir análise de risco de operação aeronáutica. Integração em sistemas operacionais exigiria indicadores adicionais, mecanismos de fallback, validação e revisão regulatória aplicável.
+
+\section*{Disponibilidade, créditos e referências}
+\textbf{Código e demonstração:} \url{https://github.com/Whatisthetimeac/AEGIS-UAV}. \textbf{Site:} \url{https://whatisthetimeac.github.io/AEGIS-UAV/}. Reprodução: \texttt{matlab/reproduce\_iecon\_results.m} e \texttt{data/iecon\_replay\_provenance.json}.
+
+\textbf{Nota de autoria.} AEGIS-UAV é um artefato demonstrativo individual para o prêmio. O estudo IECON, que fornece sua base científica, possui autoria conjunta. Contribuições, direitos de código anterior e créditos da pesquisa devem permanecer adequadamente atribuídos; nenhum depósito de dados restritos é pretendido.
+
+\begin{enumerate}[leftmargin=*,label={[\arabic*]},itemsep=2pt]
+\item A. C. S. Teixeira \textit{et al.}, ``From Uniform Thresholds to Service-Aware Link Admission in UAV Missions: A Reproducible MATLAB Study,'' artigo aceito, IEEE IECON 2026, manuscrito fornecido pelos autores. Sem DOI confirmado neste relatório.
+\item 3GPP, \textit{TS 22.125 V19.2.0, Unmanned Aerial System (UAS) support in 3GPP}, Rel. 19, 2026.
+\item M. S. Hossen \textit{et al.}, ``Accelerating Development in UAV Network Digital Twins with a Flexible Simulation Framework,'' IEEE ICC Workshops, 2025.
+\item OpenStreetMap contributors, \textit{OpenStreetMap copyright and attribution}, \url{https://www.openstreetmap.org/copyright}.\end{enumerate}
+\end{document}
