@@ -38,6 +38,7 @@
 
 
 
+  <link rel="stylesheet" href="design-upgrade.css">
 </head>
 <body>
  <div class="app-shell">
@@ -66,6 +67,12 @@
     </section>
     <section class="mission-selector"><div class="mission-select-left"><label for="missionSelect">CENÁRIO DE MISSÃO</label><select id="missionSelect"><option value="4" selected>00 · IECON 2026 · 1.806 avaliações reproduzidas</option><option value="0">01 · Inspeção de infraestrutura · Rio</option><option value="1">02 · Monitoramento costeiro · Guanabara</option><option value="2">03 · Busca e resposta · Niterói</option><option value="3">04 · Mapeamento urbano · São Gonçalo</option></select><span id="missionDescription"></span></div><div class="mission-tools"><button id="waypointMode" class="outline-btn">＋ Adicionar waypoint</button><button id="geojsonBtn" class="outline-btn">↓ Plano GeoJSON</button></div></section>
     <div class="disclaimer"><span class="info-icon">i</span><span><b id="dataModeLabel">IECON 2026 · geometria esquemática modelada</b> <span id="dataModeDetail">O sistema reproduz 1.806 avaliações modeladas do IECON 2026 com SNR contínuo. A cartografia OpenStreetMap contextualiza os cenários; as rotas são simuladas e identificadas como tais.</span></span></div>
+    <section class="proof-ribbon" aria-label="Resultados científicos IECON 2026">
+      <div class="proof-ribbon-item lead"><small>VALOR OPERACIONAL</small><strong>Decisão adequada a cada serviço</strong><span>Critérios rastreáveis para controle e vídeo UAV</span></div>
+      <div class="proof-ribbon-item"><small>AVALIAÇÕES MODELADAS</small><strong>1.806</strong><span>seis trajetórias auditadas</span></div>
+      <div class="proof-ribbon-item"><small>GANHO NA CLASSIFICAÇÃO</small><strong>+13,51 p.p.</strong><span>cenário principal · por perfil</span></div>
+      <div class="proof-ribbon-item"><small>REJEIÇÕES EVITADAS</small><strong>244</strong><span>por perfil menos exigente</span></div>
+    </section>
     <section class="dashboard-grid" aria-label="Painel operacional">
       <article class="panel map-panel"><div class="panel-head"><h2><span class="panel-icon">⌖</span> Active Drone Map</h2><span class="panel-label">OpenStreetMap · 5 cenários</span></div><div class="map-area"><div id="liveMap" class="map-canvas" role="img" aria-label="Mapa ilustrativo de posições e trajetórias simuladas de seis drones"></div><svg id="fallbackMap" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><div class="map-shade"></div><div class="map-control-list" id="droneChips"></div><span class="map-attribution" id="mapAttr">Mapa ilustrativo local · OSM quando disponível</span><div class="map-zoom"><button id="zoomIn" aria-label="Ampliar mapa">+</button><button id="zoomOut" aria-label="Reduzir mapa">−</button></div></div></article>
       <article class="panel paths-panel"><div class="panel-head"><h2><span class="panel-icon">⌁</span> Flight Paths & Link Quality</h2><span class="panel-label">seis trajetórias modeladas</span></div><div class="path-body"><canvas id="pathChart" aria-label="Curvas sintéticas de SNR por UAV em função do tempo"></canvas><div class="chart-key" id="pathLegend"></div><div class="chart-foot"><span>Tempo da missão (s)</span><span>Variável exibida: SNR (dB)</span></div></div></article>
