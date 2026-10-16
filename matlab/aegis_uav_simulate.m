@@ -1,4 +1,4 @@
-function outputFile = aegis_uav_simulate(missionId, outputFile)
+function outputFile = aegis_uav_simulate(missionId, outputFile, configFile)
 % AEGIS-UAV | reproducible synthetic mission CSV generator for MATLAB.
 % This is NEW demonstration code, not the original IECON 2026 generator.
 % The coordinate backgrounds of the webpage use OpenStreetMap. The planned
@@ -22,6 +22,14 @@ switch lower(missionId)
   error('Missao desconhecida: use power, coastal, rescue ou urban');
 end
 W=W*1.45; % match the larger illustrative corridor radius used in the browser
+% Optional local planner configuration: coordinates already in meters, no rescaling.
+if nargin >= 3 && ~isempty(configFile)
+ cfg=jsondecode(fileread(configFile));
+ W=cfg.waypoints; altitude=cfg.altitude_m;
+ assert(size(W,2)==2 && size(W,1)>=2 && size(W,1)<=16,'Invalid waypoints');
+ assert(all(isfinite(W(:))) && all(abs(W(:))<=10000),'Invalid coordinates');
+ assert(isscalar(altitude) && isfinite(altitude) && altitude>=1 && altitude<=2000,'Invalid altitude');
+end
 fid=fopen(outputFile,'w');if fid<0,error('Nao foi possivel abrir o arquivo');end
 cleanup=onCleanup(@()fclose(fid));
 fprintf(fid,'uav,time_s,x_m,y_m,altitude_m,snr_db,mission,source\n');

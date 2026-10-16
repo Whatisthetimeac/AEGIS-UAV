@@ -1,0 +1,13 @@
+{
+  "engine": "Node.js executing src/app.js and src/research.js",
+  "engine_version": "v24.19.0",
+  "model": "deterministic FSPL",
+  "conditions": 20,
+  "profiles": 4,
+  "link_position_evaluations": 36120,
+  "independent_flights": false,
+  "matlab_executed": false,
+  "baseline_uniform_count": 1562,
+  "reference_snr_max_error_db": 5.110862844048825e-10,
+  "generated_at": "2026-10-16T20:22:12.383Z"
+}
