@@ -77,4 +77,20 @@ drawFallbackPositions=function(){
   if(i===state.drone){const label=svg('text',{x:p.x+10,y:p.y-9,fill:'#edfbfa','font-size':10,'font-weight':600,'paint-order':'stroke',stroke:'#122636','stroke-width':2.5});label.textContent='UAV '+NAMES[i];ov.appendChild(label)}
  }
 };
+
+// If a mobile webview blocks the first Leaflet CDN, try a second CDN.
+// The scientific dashboard remains operational if neither map library loads.
+window.addEventListener('load',()=>{
+ setTimeout(()=>{
+  if(typeof L!=='undefined' || leaflet)return;
+  const alternateCss=document.createElement('link');alternateCss.rel='stylesheet';
+  alternateCss.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css';
+  document.head.appendChild(alternateCss);
+  const alternate=document.createElement('script');
+  alternate.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js';
+  alternate.onload=()=>{if(!leaflet && typeof L!=='undefined'){initLeaflet();render()}};
+  alternate.onerror=()=>console.info('Leaflet indisponível; mantendo mapa esquemático');
+  document.head.appendChild(alternate);
+ },1800);
+},{once:true});
 })();
