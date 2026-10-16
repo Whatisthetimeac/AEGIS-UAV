@@ -1,0 +1,63 @@
+
+/* AEGIS-UAV — Competition Visual Upgrade v6 */
+:root{--teal:#64e8d4;--panel:#142238;--line:#36516a;--muted:#abc1d1}
+body{background:radial-gradient(ellipse 800px 580px at 90% -10%,#18375088,transparent),#080e17}
+.main{background:radial-gradient(ellipse 730px 390px at 92% 0%,#17374a66,transparent),#090f19}
+.sidebar{background:linear-gradient(180deg,#101e2e,#0a1422 75%,#071019);border-right:1px solid #30495e}
+.navitem.active{box-shadow:inset 3px 0 0 #6cf0d5;background:linear-gradient(90deg,#193f46,#142b3c)}
+.topbar{border-bottom:1px solid #2d4356}
+.hero{padding:29px 3px 19px}.hero h1{font-size:clamp(27px,2.5vw,39px);letter-spacing:-1.3px;font-weight:810;line-height:1.16;margin-bottom:8px}
+.hero p{max-width:775px;color:#c0d5e5;font-size:12px;line-height:1.6}.eyebrow{color:#7ef6dd;letter-spacing:1.8px;font-size:10px}
+.meta-pill{border-radius:999px;padding:8px 13px}
+.primary-btn{background:linear-gradient(115deg,#37c7c0,#7bf0d9);color:#082b31;box-shadow:0 5px 18px #42e5c722}
+.outline-btn{background:linear-gradient(145deg,#22394d,#162a3e);border-color:#4c6980}
+.mission-selector{background:linear-gradient(110deg,#162e40,#102131);border:1px solid #456879;box-shadow:inset 0 1px 0 #a4fcef12}
+.mission-select-left select{background:#0c1b2a;border:1px solid #567388;min-height:43px;font-size:12px}
+.disclaimer{background:#122d3d;border:1px solid #326674;border-radius:10px;padding:11px 14px;color:#c8dce8;font-size:10px;line-height:1.55}
+.dashboard-grid,.lower-grid,.deep-grid{gap:14px}
+.panel{background:linear-gradient(145deg,#1a2b40,#101e30 68%);border:1px solid #39556c;border-radius:12px;box-shadow:0 13px 30px #0004,inset 0 1px 0 #a5ffe610}
+.panel-head{height:49px;padding:0 14px;background:linear-gradient(90deg,#223449,#192b3f);border-bottom:1px solid #37516a}
+.panel-head h2{font-size:12px;letter-spacing:.12px}.panel-icon{color:#78e7d5}
+.panel-label{font-size:9px;color:#aac1d1}
+.map-area{height:295px}.path-body,.metrics-grid{height:295px}.path-body canvas{height:224px}
+.leaflet-tile{filter:brightness(.84) contrast(1.12) saturate(.93)}.map-shade{background:linear-gradient(90deg,#071a2540,transparent 64%)}
+.map-control-list{width:119px;border-color:#547589;background:#081c2bee;box-shadow:0 12px 25px #0009}
+.dronechip{padding:9px 8px;font-size:10px}.dronechip.selected{background:#246365;box-shadow:inset 3px 0 0 #79f7dc}
+.metric{background:linear-gradient(140deg,#293e50,#192c40);border-color:#48647a;padding:13px 11px}
+.metric label{font-size:10px;color:#c5d7e3;font-weight:620}.metric-number{margin:13px 0 11px}
+.metric-number strong{font-size:clamp(24px,2.5vw,32px);font-weight:790;color:#f6fcff}
+.progress{height:4px;background:#3b5364}.progress i{background:linear-gradient(90deg,#39bcb5,#7df4dc)}
+.mission-line{background:#1c2e43;border-left-color:#63dacc;padding:10px 11px}
+.fleet-tiles>div{background:linear-gradient(125deg,#293c4f,#1a2c40);border-color:#496176}.fleet-tiles b{font-size:26px}
+.alert-row{background:#2a3448;border-left-width:4px}
+.panel-body{padding:15px}.control-grid label{color:#c6d7e4;font-size:11px}
+.control-grid select{background:#15283c;border-color:#4c6a7d;padding:10px;font-size:12px}
+.service-line{padding:9px 5px;font-size:11px}.decision-tag{padding:7px 4px}
+.comparison-panel canvas{height:204px}.explain-box{font-size:12px;line-height:1.6;padding:13px}
+.evidence-grid div{background:linear-gradient(125deg,#20384b,#182a40);border-color:#44657a;min-height:94px;padding:13px 11px}
+.evidence-grid strong{font-size:28px;color:#f4fbfc}.evidence-grid span{font-size:10px}
+.evidence-foot{padding:12px 13px;border-color:#318779;background:#15413e}.evidence-foot b{font-size:21px}
+.evidence-note{font-size:10px;line-height:1.55}
+.table-scroll th{background:#22394d}.table-scroll td,.table-scroll th{padding:12px 8px}
+.notes{font-size:11.5px;line-height:1.72}
+.proof-ribbon{display:grid;grid-template-columns:1.3fr repeat(3,minmax(0,1fr));gap:10px;margin:0 0 16px}
+.proof-ribbon-item{border:1px solid #36586c;border-radius:11px;padding:12px 14px;background:linear-gradient(115deg,#172e3f,#0e202f);display:flex;flex-direction:column;justify-content:center;min-height:79px;box-shadow:inset 0 1px 0 #a4f5e40c}
+.proof-ribbon-item.lead{background:linear-gradient(105deg,#184743,#18394b);border-color:#3a8678}
+.proof-ribbon-item small{color:#87decc;letter-spacing:1.2px;font-size:9px;font-weight:800}
+.proof-ribbon-item strong{font-size:23px;letter-spacing:-.7px;line-height:1.18;color:#f3fffc;margin-top:4px;font-variant-numeric:tabular-nums}
+.proof-ribbon-item.lead strong{font-size:15px;letter-spacing:-.2px}
+.proof-ribbon-item span{font-size:10px;color:#bed7df;line-height:1.38;margin-top:4px}
+@media(max-width:1240px){.proof-ribbon{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.main{padding:0 12px 23px}.topbar{margin:0 -12px;padding:10px 12px}.hero{padding:17px 1px 12px}.hero h1{font-size:27px}.hero p{font-size:12px}.eyebrow{font-size:9px;letter-spacing:1.3px}
+.mission-selector{padding:13px}.mission-select-left{min-width:0}.mission-select-left select{min-height:44px}
+.disclaimer{padding:10px;font-size:10px;margin-bottom:12px}
+.proof-ribbon{gap:8px;margin-bottom:13px}.proof-ribbon-item{padding:10px 11px;min-height:84px}
+.proof-ribbon-item small{font-size:8px}.proof-ribbon-item strong{font-size:22px}.proof-ribbon-item.lead strong{font-size:13px}.proof-ribbon-item span{font-size:9px}
+.dashboard-grid,.lower-grid,.deep-grid{gap:12px}.panel-head{height:47px}.panel-head h2{font-size:12px}
+.map-area{height:323px}.map-control-list{width:112px}.map-attribution{max-width:calc(100% - 28px)}
+.metrics-grid{height:auto;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.metric{min-height:112px;padding:12px 9px}.metric-number strong{font-size:25px}
+.path-body{height:270px}.path-body canvas{height:209px}.panel-body{padding:13px}.service-line{font-size:10px}
+.evidence-grid div{min-height:90px}.evidence-grid strong{font-size:25px}
+}
+@media(max-width:390px){.top-actions .meta-pill{display:none}.hero h1{font-size:25px}.proof-ribbon-item{padding:9px}.map-area{height:298px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
