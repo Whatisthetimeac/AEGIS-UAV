@@ -44,6 +44,21 @@ Marcadores pequenos e luminosos distinguem cada UAV sem esconder o mapa. A aeron
 
 A cartografia de fundo é OpenStreetMap quando os tiles estão disponíveis, com fallback esquemático quando a conexão externa falha.
 
+
+## Demonstração de impacto em um clique
+
+Use o botão **“Ver caso MATLAB: D4, 145 s”**, no quadro **“Um mesmo enlace. Decisões diferentes.”**: a amostra modelada apresenta **13,990980 dB** de SNR. O limiar uniforme conservador de 14,1 dB rejeita os quatro perfis, enquanto a avaliação por serviço admite **C2 waypoint, C2 direct-stick e vídeo VLOS** e mantém vídeo N-VLOS rejeitado. Os controles de aeronave, instante, margem e perda atualizam o comparativo usando o mesmo motor matemático do painel.
+
+Esse exemplo é um registro da base modelada do IECON 2026, não uma medição em voo. [Veja o roteiro de 3 minutos e perguntas da banca](docs/ROTEIRO_APTEL_BANCA.md).
+
+## Teste de reprodutibilidade
+
+```bash
+python tests/test_iecon_regression.py
+```
+
+O teste reproduz as contagens essenciais (1.806, 1.562, 1.581, 244 por perfil), os seis resultados por trajetória e o exemplo D4 em 145 s. A interface também foi testada localmente em resoluções de desktop e celular para o modo guiado.
+
 ## Estudo multicontexto
 
 ![Comparação VLOS em vinte condições modeladas](docs/figures/study_vlos.svg)
