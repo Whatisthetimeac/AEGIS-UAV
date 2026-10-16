@@ -1,34 +1,51 @@
-name: Scientific reproducibility checks
+name: Scientific and interface regressions
 on:
   push:
     branches: [main]
     paths:
-      - 'data/iecon_model_replay_1806.csv'
-      - 'tests/test_iecon_regression.py'
+      - 'index.html'
+      - 'src/**'
+      - 'data/**'
+      - 'tests/**'
       - 'competition-mode.js'
+      - 'competition-mode.css'
       - 'map-refinement.js'
+      - 'map-refinement.css'
+      - 'blue-signature.css'
+      - 'neutral-finish.css'
+      - 'docs/**'
       - '.github/workflows/scientific-regression.yml'
   pull_request:
     paths:
-      - 'data/iecon_model_replay_1806.csv'
-      - 'tests/test_iecon_regression.py'
+      - 'index.html'
+      - 'src/**'
+      - 'data/**'
+      - 'tests/**'
       - 'competition-mode.js'
+      - 'competition-mode.css'
       - 'map-refinement.js'
+      - 'map-refinement.css'
+      - 'blue-signature.css'
+      - 'neutral-finish.css'
+      - 'docs/**'
 jobs:
   verify:
     runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Python environment
+      - name: Install Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Reproduce scientific counts and policy decisions
+      - name: Validate IECON model calculations
         run: python tests/test_iecon_regression.py
-      - name: Verify client-side JavaScript syntax
+      - name: Validate visual assets, map colors and links
+        run: python tests/test_visual_contract.py
+      - name: Verify JavaScript syntax
         run: |
           node --check competition-mode.js
           node --check map-refinement.js
+          node --check src/app.js
