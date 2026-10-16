@@ -1,0 +1,34 @@
+name: Scientific reproducibility checks
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/iecon_model_replay_1806.csv'
+      - 'tests/test_iecon_regression.py'
+      - 'competition-mode.js'
+      - 'map-refinement.js'
+      - '.github/workflows/scientific-regression.yml'
+  pull_request:
+    paths:
+      - 'data/iecon_model_replay_1806.csv'
+      - 'tests/test_iecon_regression.py'
+      - 'competition-mode.js'
+      - 'map-refinement.js'
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Python environment
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reproduce scientific counts and policy decisions
+        run: python tests/test_iecon_regression.py
+      - name: Verify client-side JavaScript syntax
+        run: |
+          node --check competition-mode.js
+          node --check map-refinement.js
