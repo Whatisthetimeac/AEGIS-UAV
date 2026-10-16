@@ -44,6 +44,8 @@ drawMap=function(){
  if(leaflet){for(let i=0;i<6;i++){
   const p=position(i,state.time),selected=i===state.drone;
   leaflet.dots[i].setLatLng(toLatLng(p.x,p.y));leaflet.dots[i].setZIndexOffset(selected?200:0);
+  const link=radioLink(i,state.time),accepted=decide(link.snrDb).filter(item=>item.mapped).length;
+  leaflet.dots[i].setTooltipContent('UAV '+NAMES[i]+' · SNR '+number(link.snrDb,2)+' dB · '+accepted+'/4 serviços admissíveis');
   const node=leaflet.dots[i].getElement();
   if(node){node.classList.toggle('is-selected',selected);node.setAttribute('aria-label','UAV '+NAMES[i])}
   leaflet.trails[i].setStyle({weight:selected?2:1.2,opacity:selected?.9:.4,dashArray:selected?null:'4 6'});
