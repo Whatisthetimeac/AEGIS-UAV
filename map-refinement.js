@@ -18,7 +18,7 @@ initLeaflet=function(){
   const map=L.map('liveMap',{zoomControl:false,attributionControl:true,scrollWheelZoom:false,preferCanvas:true}).setView(mission().center,14);
   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{minZoom:11,maxZoom:18,attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>',crossOrigin:true}).addTo(map);
   const wpLayer=L.layerGroup().addTo(map);
-  const plannedRoute=L.polyline([],{color:'#efcfaa',weight:1.25,opacity:.66,dashArray:'3 6',lineCap:'round'}).addTo(map);
+  const plannedRoute=L.polyline([],{color:'#a6d0f7',weight:1.25,opacity:.66,dashArray:'3 6',lineCap:'round'}).addTo(map);
   const base=L.marker(mission().center,{icon:stationIcon(),keyboard:true}).addTo(map).bindTooltip('Estação-base do modelo');
   const trails=[],dots=[];
   for(let i=0;i<6;i++){
@@ -56,15 +56,15 @@ drawMap=function(){
 drawFallbackPositions=function(){
  const ov=$('fallbackOverlay');if(!ov)return;ov.replaceChildren();
  const ref=xyToSvg({x:0,y:0});
- ov.appendChild(svg('circle',{cx:ref.x,cy:ref.y,r:10,fill:'none',stroke:'#f1d9ad','stroke-width':.9,opacity:.5}));
- ov.appendChild(svg('rect',{x:ref.x-4,y:ref.y-4,width:8,height:8,transform:'rotate(45 '+ref.x+' '+ref.y+')',fill:'#efd2a3',stroke:'#233745','stroke-width':1}));
- const base=svg('text',{x:ref.x+10,y:ref.y-9,fill:'#f4e1c0','font-size':10});base.textContent='BASE';ov.appendChild(base);
+ ov.appendChild(svg('circle',{cx:ref.x,cy:ref.y,r:10,fill:'none',stroke:'#a8cbf0','stroke-width':.9,opacity:.5}));
+ ov.appendChild(svg('rect',{x:ref.x-4,y:ref.y-4,width:8,height:8,transform:'rotate(45 '+ref.x+' '+ref.y+')',fill:'#a7ccef',stroke:'#233745','stroke-width':1}));
+ const base=svg('text',{x:ref.x+10,y:ref.y-9,fill:'#d5e9ff','font-size':10});base.textContent='BASE';ov.appendChild(base);
  if(mission().id!=='iecon'){
   const points=mission().waypoints.map(([x,y])=>xyToSvg({x,y}));
-  ov.appendChild(svg('polyline',{points:points.map(p=>p.x+','+p.y).join(' '),fill:'none',stroke:'#edd0aa','stroke-width':1.15,'stroke-dasharray':'3 6',opacity:.65}));
+  ov.appendChild(svg('polyline',{points:points.map(p=>p.x+','+p.y).join(' '),fill:'none',stroke:'#9fc4e9','stroke-width':1.15,'stroke-dasharray':'3 6',opacity:.65}));
   points.forEach((p,j)=>{
-   ov.appendChild(svg('rect',{x:p.x-3.5,y:p.y-3.5,width:7,height:7,rx:1,transform:'rotate(45 '+p.x+' '+p.y+')',fill:'#f0d7ab',stroke:'#1a3140','stroke-width':1}));
-   if(j<9){const label=svg('text',{x:p.x+8,y:p.y-8,fill:'#f5dfc2','font-size':9});label.textContent=String(j+1);ov.appendChild(label)}
+   ov.appendChild(svg('rect',{x:p.x-3.5,y:p.y-3.5,width:7,height:7,rx:1,transform:'rotate(45 '+p.x+' '+p.y+')',fill:'#b5d7fa',stroke:'#1a3140','stroke-width':1}));
+   if(j<9){const label=svg('text',{x:p.x+8,y:p.y-8,fill:'#d2e9ff','font-size':9});label.textContent=String(j+1);ov.appendChild(label)}
   });
  }
  for(let i=0;i<6;i++){
@@ -74,7 +74,7 @@ drawFallbackPositions=function(){
   if(i===state.drone)ov.appendChild(svg('circle',{cx:p.x,cy:p.y,r:10,fill:'none',stroke:COLORS[i],'stroke-width':.85,opacity:.5}));
   const dot=svg('circle',{cx:p.x,cy:p.y,r:i===state.drone?5:3.7,fill:COLORS[i],stroke:'#dff9f5','stroke-width':1,style:'cursor:pointer'});
   dot.addEventListener('click',()=>setSelected(i));ov.appendChild(dot);
-  if(i===state.drone){const label=svg('text',{x:p.x+10,y:p.y-9,fill:'#edfbfa','font-size':10,'font-weight':600,'paint-order':'stroke',stroke:'#122636','stroke-width':2.5});label.textContent='UAV '+NAMES[i];ov.appendChild(label)}
+  if(i===state.drone){const label=svg('text',{x:p.x+10,y:p.y-9,fill:'#eaf5ff','font-size':10,'font-weight':600,'paint-order':'stroke',stroke:'#122636','stroke-width':2.5});label.textContent='UAV '+NAMES[i];ov.appendChild(label)}
  }
 };
 
