@@ -52,6 +52,7 @@ html{scroll-padding-top:24px}body,.main{background:#0a1112}.main{padding:0 30px 
 @media print{.sidebar,.topbar,.hero-right,.mission-tools,.control-actions,.analysis-toolbar select,button{display:none!important}.main{padding:0}.panel{break-inside:avoid}.research-grid,.dashboard-grid,.lower-grid,.deep-grid{display:block}.panel{margin:12px 0}.map-area{height:300px}}
 
 </style>
+<link rel="stylesheet" href="map-refinement.css">
 </head>
 <body>
  <div class="app-shell">
@@ -366,5 +367,6 @@ function bindResearch(){
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindResearch);else bindResearch();
 window.AEGIS_RESEARCH={analysisSamples,summarizeSamples,runBatchStudy,LINK_LEVELS};
 
-</script></body>
+</script><script src="map-refinement.js"></script>
+</body>
 </html>
