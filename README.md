@@ -1,4 +1,6 @@
 # AEGIS-UAV
+
+[![Scientific reproducibility checks](https://github.com/Whatisthetimeac/AEGIS-UAV/actions/workflows/scientific-regression.yml/badge.svg)](https://github.com/Whatisthetimeac/AEGIS-UAV/actions/workflows/scientific-regression.yml)
 ### Requisitos de missão. Decisões de comunicação explicáveis.
 
 O **AEGIS-UAV** é um ambiente de pesquisa e apoio ao planejamento de comunicações UAV. Ele traduz requisitos de controle e vídeo em critérios de admissibilidade de taxa, compara políticas sob o mesmo sinal e torna cada decisão inspecionável.
