@@ -1,0 +1,36 @@
+/* AEGIS-UAV · Soft instrumentation map, inspired by the submitted reference */
+:root{--teal:#61dfcf;--teal2:#3bbcb5;--bg:#080e18;--panel:#142033;--muted:#91a9bd}
+body{background:#080e18}.main{background:radial-gradient(ellipse at 85% 2%,#162b4055,transparent 38%),#090f19}
+.panel{background:linear-gradient(145deg,#17253a,#101d2f);border:1px solid #2f445a;border-radius:10px;box-shadow:0 9px 22px #0002}
+.panel-head{background:linear-gradient(90deg,#1b2b40,#18283d);border-bottom-color:#31475c;height:45px}
+.hero{padding:22px 2px 15px}.hero h1{font-size:clamp(24px,2.5vw,35px)}
+.metric{background:linear-gradient(125deg,#26394e,#19293d);border-color:#3b5267}
+.mission-selector{background:#142438;border:1px solid #35556a}
+.primary-btn{background:linear-gradient(135deg,#2caaa3,#5be1c9);box-shadow:none}
+.map-area{height:300px}.path-body,.metrics-grid{height:300px}.path-body canvas{height:230px}
+.leaflet-tile{filter:brightness(.85) saturate(.82) contrast(1.09)}
+.map-shade{background:linear-gradient(90deg,#0c1a2640,transparent 58%)}
+.map-control-list{width:104px;border:1px solid #3d5263;background:#0b1726ed;border-radius:6px}
+.dronechip{font-size:9px;padding:7px 8px}.dronechip i{width:4px;height:4px}
+.dronechip.selected{background:#1d4149;box-shadow:inset 2px 0 #61dfcf}
+.map-attribution{background:#0b1726d9}
+.aegis-div-icon{background:transparent!important;border:0!important;overflow:visible!important}
+.aegis-aircraft{--aircraft-color:#61dfcf;position:absolute;inset:0;width:18px;height:18px;display:block;cursor:pointer}
+.aegis-aircraft-halo{position:absolute;inset:1px;border:1px solid var(--aircraft-color);border-radius:50%;opacity:.12;transform:scale(.8);transition:opacity .15s,transform .15s}
+.aegis-aircraft-core{position:absolute;left:5px;top:5px;width:8px;height:8px;background:var(--aircraft-color);border:1.3px solid #dff9f5;border-radius:50%;box-shadow:0 0 7px #65ddcb45}
+.aegis-aircraft-name{position:absolute;left:19px;top:0px;padding:0 6px;border:1px solid #526b78;border-radius:5px;background:#0c1c2aed;color:#e9faf7;white-space:nowrap;font:600 10px/17px Inter,system-ui,sans-serif;opacity:0;transform:translateX(-3px);pointer-events:none;transition:opacity .15s,transform .15s}
+.aegis-div-icon.is-selected .aegis-aircraft-halo{opacity:.53;transform:scale(1.18)}
+.aegis-div-icon.is-selected .aegis-aircraft-core{background:#79e6d3;box-shadow:0 0 0 3px #75e8d322,0 0 10px #75e8d365}
+.aegis-div-icon.is-selected .aegis-aircraft-name,.aegis-div-icon:hover .aegis-aircraft-name,.aegis-div-icon:focus-visible .aegis-aircraft-name{opacity:1;transform:translateX(0)}
+.aegis-waypoint{position:absolute;inset:0;width:14px;height:14px;cursor:pointer}
+.aegis-waypoint-diamond{position:absolute;left:4px;top:4px;width:6px;height:6px;background:#eecda1;border:1px solid #faf0d7;border-radius:1px;transform:rotate(45deg);box-shadow:0 0 5px #f6d0a335}
+.aegis-waypoint-index{position:absolute;top:-14px;left:12px;color:#f2ddb8;font:500 9px system-ui,sans-serif;opacity:0}
+.aegis-div-icon:hover .aegis-waypoint-index{opacity:1}
+.aegis-station{position:absolute;inset:0;width:18px;height:18px}
+.aegis-station-cross{position:absolute;left:4px;top:4px;width:10px;height:10px;background:#f1d9ad;border:1px solid #fff3d5;border-radius:2px;transform:rotate(45deg);box-shadow:0 0 0 4px #f3d4a316}
+.aegis-station-label{position:absolute;left:21px;top:1px;padding:0 5px;border-radius:4px;color:#f7dfbc;background:#172736d9;font:600 9px/16px system-ui,sans-serif}
+.leaflet-tooltip{background:#0c1b29ef;color:#e0f6f3;border:1px solid #456774;box-shadow:0 4px 15px #0006;font:500 10px system-ui,sans-serif;border-radius:5px}
+.leaflet-tooltip-top:before{border-top-color:#456774}
+@media(max-width:800px){.map-area{height:315px}.map-control-list{width:99px}.metrics-grid{height:auto}.path-body{height:270px}.path-body canvas{height:205px}.hero h1{font-size:26px}}
+@media(max-width:390px){.map-area{height:300px}.hero h1{font-size:24px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
