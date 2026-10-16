@@ -51,7 +51,7 @@ drawMap=function(){
   leaflet.trails[i].setStyle({weight:selected?2:1.2,opacity:selected?.9:.4,dashArray:selected?null:'4 6'});
  }}else drawFallbackPositions();
  const chips=$('droneChips');chips.replaceChildren();
- for(let i=0;i<6;i++){const b=document.createElement('button');b.className='dronechip'+(i===state.drone?' selected':'');b.textContent='UAV '+NAMES[i];b.setAttribute('aria-pressed',String(i===state.drone));b.appendChild(document.createElement('i'));b.onclick=()=>setSelected(i);chips.appendChild(b)}
+ for(let i=0;i<6;i++){const b=document.createElement('button');b.className='dronechip'+(i===state.drone?' selected':'');b.textContent='UAV '+NAMES[i];b.setAttribute('aria-pressed',String(i===state.drone));const colorDot=document.createElement('i');colorDot.style.backgroundColor=COLORS[i];colorDot.style.boxShadow='0 0 5px '+COLORS[i]+'66';b.appendChild(colorDot);b.onclick=()=>setSelected(i);chips.appendChild(b)}
 };
 drawFallbackPositions=function(){
  const ov=$('fallbackOverlay');if(!ov)return;ov.replaceChildren();
