@@ -51,21 +51,21 @@
       <a href="#audit" class="navitem"><span>≡</span> Audit & Exports</a>
     </nav>
     <div class="side-bottom">
-      <div class="status-card"><i class="led"></i><div><b>Modelo operacional</b><small>Simulação local, sem voo real</small></div></div>
+      <div class="status-card"><i class="led"></i><div><b>Modelo operacional</b><small>1.806 avaliações IECON reproduzidas</small></div></div>
       <div class="buildline">AEGIS-UAV / v5.0<br>IECON 2026 • APTEL 2026</div>
     </div>
   </aside>
   <main class="main">
     <header class="topbar">
       <div class="breadcrumbs"><span>AEGIS-UAV</span><span class="sep">/</span><b>Mission Control</b></div>
-      <div class="top-actions"><span class="meta-pill"><i class="led"></i> SIMULAÇÃO LOCAL</span><span class="meta-pill soft">MODELO AUDITÁVEL</span><button id="quickReport" class="primary-btn">↓ Exportar auditoria</button></div>
+      <div class="top-actions"><span class="meta-pill"><i class="led"></i> REPRODUÇÃO + SIMULAÇÃO</span><span class="meta-pill soft">DECISÃO AUDITÁVEL</span><button id="quickReport" class="primary-btn">↓ Exportar auditoria</button></div>
     </header>
     <section class="hero" id="overview">
-      <div><div class="eyebrow">MISSION OPERATIONS / RADIO ADMISSION</div><h1>Mission Control <span>/</span> Decision Lab</h1><p>Decisões de comunicação orientadas ao serviço para missões multi-UAV. Do requisito técnico à classificação rastreável.</p></div>
-      <div class="hero-right"><b id="missionClock">T + 03:45</b><span>SIMULAÇÃO DEMONSTRATIVA</span></div>
+      <div><div class="eyebrow">APTEL INOVAR 2026 / INTELIGÊNCIA DE COMUNICAÇÃO UAV</div><h1>Mission Control <span>/</span> Decision Lab</h1><p>Decisões de comunicação explicáveis para infraestrutura crítica: avalie enlaces por serviço, compare políticas e rastreie cada decisão com evidência científica reproduzível.</p></div>
+      <div class="hero-right"><b id="missionClock">T + 03:45</b><span>BASE MATEMÁTICA IECON 2026</span></div>
     </section>
     <section class="mission-selector"><div class="mission-select-left"><label for="missionSelect">CENÁRIO DE MISSÃO</label><select id="missionSelect"><option value="4" selected>00 · IECON 2026 · 1.806 avaliações reproduzidas</option><option value="0">01 · Inspeção de infraestrutura · Rio</option><option value="1">02 · Monitoramento costeiro · Guanabara</option><option value="2">03 · Busca e resposta · Niterói</option><option value="3">04 · Mapeamento urbano · São Gonçalo</option></select><span id="missionDescription"></span></div><div class="mission-tools"><button id="waypointMode" class="outline-btn">＋ Adicionar waypoint</button><button id="geojsonBtn" class="outline-btn">↓ Plano GeoJSON</button></div></section>
-    <div class="disclaimer"><span class="info-icon">i</span><span><b id="dataModeLabel">IECON 2026 · geometria esquemática modelada</b> <span id="dataModeDetail">SNR contínuo reproduzido dos 1.806 registros do pacote MATLAB fornecido. OpenStreetMap é apenas fundo cartográfico: a geometria não corresponde a localizações reais de voo. Não há telemetria ao vivo.</span></span></div>
+    <div class="disclaimer"><span class="info-icon">i</span><span><b id="dataModeLabel">IECON 2026 · geometria esquemática modelada</b> <span id="dataModeDetail">O sistema reproduz 1.806 avaliações modeladas do IECON 2026 com SNR contínuo. A cartografia OpenStreetMap contextualiza os cenários; as rotas são simuladas e identificadas como tais.</span></span></div>
     <section class="dashboard-grid" aria-label="Painel operacional">
       <article class="panel map-panel"><div class="panel-head"><h2><span class="panel-icon">⌖</span> Active Drone Map</h2><span class="panel-label">OpenStreetMap · 5 cenários</span></div><div class="map-area"><div id="liveMap" class="map-canvas" role="img" aria-label="Mapa ilustrativo de posições e trajetórias simuladas de seis drones"></div><svg id="fallbackMap" viewBox="0 0 640 360" preserveAspectRatio="xMidYMid slice" aria-hidden="true"></svg><div class="map-shade"></div><div class="map-control-list" id="droneChips"></div><span class="map-attribution" id="mapAttr">Mapa ilustrativo local · OSM quando disponível</span><div class="map-zoom"><button id="zoomIn" aria-label="Ampliar mapa">+</button><button id="zoomOut" aria-label="Reduzir mapa">−</button></div></div></article>
       <article class="panel paths-panel"><div class="panel-head"><h2><span class="panel-icon">⌁</span> Flight Paths & Link Quality</h2><span class="panel-label">seis trajetórias modeladas</span></div><div class="path-body"><canvas id="pathChart" aria-label="Curvas sintéticas de SNR por UAV em função do tempo"></canvas><div class="chart-key" id="pathLegend"></div><div class="chart-foot"><span>Tempo da missão (s)</span><span>Variável exibida: SNR (dB)</span></div></div></article>
