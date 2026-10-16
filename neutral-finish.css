@@ -1,0 +1,37 @@
+/* AEGIS-UAV · Blue / White / Graphite finish.
+   The only intentional non-blue accents are six SMALL pastel UAV map markers and their paths.
+   UI engineering: readable grayscale metadata, sharp white hierarchy, restrained cool blues. */
+:root{--bg:#08111f;--bg2:#0c192b;--panel:#162940;--line:#334c67;--line2:#4a637d;--text:#f4f7fb;--muted:#b4c0cc;--teal:#9ac6f4;--teal2:#6d9ece;--amber:#a5b3c4;--red:#9faab9;--green:#b8d1e9}
+body{color:#f2f5f9;background:#08111f}
+.main{background:radial-gradient(ellipse 780px 400px at 100% -2%,#2447654a,transparent),#081321}
+.sidebar{background:linear-gradient(#101f33,#091729)}.sidebar-caption,.navitem,.buildline,.breadcrumbs{color:#a5b5c5}.navitem.active{color:#fff}
+h1,h2,h3,.hero h1,.panel-head h2,.evidence-grid strong,.metric-number strong,.proof-ribbon-item strong{color:#f6f8fb}
+.panel{background:linear-gradient(155deg,#1a2e47,#12243a 70%);border-color:#3b536e}
+.panel-head{background:linear-gradient(90deg,#253d56,#1b3049)}
+.panel-label,.chart-foot,.chart-key,.meta-label,.metric label{color:#b6c4d2}
+.hero p,.aegis-case-intro p,.notes,.proof-ribbon-item span{color:#c2cbd5}
+.hero h1 span,.eyebrow,.panel-icon,.aegis-case-kicker{color:#b9daf8}
+.disclaimer{background:#172c41;color:#cfdae3;border-color:#44617d}.disclaimer strong{color:#fff}
+.mission-selector{background:linear-gradient(105deg,#20364e,#15283d);border-color:#4d6781}
+.primary-btn,.aegis-case-primary{background:linear-gradient(115deg,#3e6c95,#5788b6);color:#fff;border-color:#85add0}
+.outline-btn,.aegis-case-secondary{background:#223951;color:#f0f4f9;border-color:#50708b}
+.meta-pill{background:#213a54;color:#e3eaf1;border-color:#53728e}.meta-pill.soft{background:#24374c;color:#d0dbe4}
+.proof-ribbon-item{background:linear-gradient(115deg,#213a53,#162c43)}.proof-ribbon-item.lead{background:linear-gradient(110deg,#295274,#1b3652)}.proof-ribbon-item small{color:#c6dcef}
+.metric{background:linear-gradient(130deg,#2b425b,#1b3049)}.metric-number span{color:#b9c7d4}.progress{background:#3e556c}.progress i{background:linear-gradient(90deg,#6f9ac2,#c1ddf8)}
+.mission-line{background:#223951}.mission-line .left strong,.service-name{color:#eef5fc}.mission-line .left small,.service-rate{color:#aebeca}
+.fleet-tiles>div{background:linear-gradient(125deg,#273c53,#1e324a)}.fleet-tiles span{color:#b4c4d2}
+.alert-row,.alert-row.critical,.alert-row.warn{background:#263a51;border-left-color:#95b4d0;color:#f4f7fb}
+.alert-row small{color:#b4c6d6}.alert-row em{color:#e1ebf4;background:#334961}
+.tag,.decision-tag,.aegis-case-chip.is-yes{background:#31536f;border:1px solid #6687a2;color:#f0f7ff}
+.tag.fail,.decision-tag.no,.aegis-case-chip.is-no{background:#263a4d;border:1px solid #50677b;color:#c0cad6}
+.aegis-case{background:linear-gradient(120deg,#203852,#182d45);border-color:#53708b}.aegis-case-results{background:#15283e}
+.aegis-case-insight,.aegis-case-insight.is-positive{background:#2b465e;border-color:#60809b;color:#ebf3f9}
+.aegis-case-service strong,.aegis-case-snr strong{color:#fff}.aegis-case-service small,.aegis-case-source{color:#bdcad6}
+.evidence-grid>div{background:linear-gradient(125deg,#29415a,#20334a)}.evidence-foot{background:#274767}.evidence-foot b{color:#fff}
+.table-scroll th{background:#284058;color:#f2f7fa}.table-scroll td{color:#d3dce3}
+.map-control-list{background:#142536ef}.dronechip{color:#edf2f8}.dronechip.selected{background:#27435e}
+.map-area{border-color:#3a5874}.map-attribution{color:#dce6f0;background:#152739e0}
+.aegis-aircraft-name{background:#172d42f0;color:#fff;border-color:#60788d}
+.aegis-waypoint-diamond{background:#c2d9ee;border-color:#f1f6fb}.aegis-station-cross{background:#d5e5f3;border-color:#f7f9fc}
+.leaflet-tooltip{color:#f1f6fa;background:#20354bef}
+@media(max-width:800px){.panel{border-color:#415a76}.aegis-case{padding:12px}}
