@@ -38,6 +38,12 @@ A contribuição é a **classificação consistente com o requisito de cada serv
 
 O botão **Demonstração guiada** seleciona um ponto existente na base em que os critérios diferem. Os resultados completos permanecem disponíveis, incluindo trajetórias e serviços sem ganho.
 
+## Mapa de missão com leitura operacional
+
+Marcadores pequenos e luminosos distinguem cada UAV sem esconder o mapa. A aeronave selecionada recebe um anel discreto e identificação contextual; ao passar o cursor, aparecem **SNR calculada e número de serviços classificados como admissíveis**. Nos cenários de planejamento, os **waypoints delicados** são ligados por uma rota pontilhada e separados visualmente das trajetórias modeladas. Clicar em um UAV atualiza as decisões e os gráficos no mesmo instante.
+
+A cartografia de fundo é OpenStreetMap quando os tiles estão disponíveis, com fallback esquemático quando a conexão externa falha.
+
 ## Estudo multicontexto
 
 ![Comparação VLOS em vinte condições modeladas](docs/figures/study_vlos.svg)
