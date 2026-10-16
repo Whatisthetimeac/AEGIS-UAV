@@ -7,6 +7,14 @@ O **AEGIS-UAV** é um ambiente de pesquisa e apoio ao planejamento de comunicaç
 
 [**Abrir aplicação**](https://whatisthetimeac.github.io/AEGIS-UAV/) · [**Método e contribuição**](docs/CONTRIBUICAO_E_VALIDACAO.md) · [**Dados do estudo**](data/study_20_scenarios.csv) · [**Execução MATLAB**](matlab/README.md)
 
+## Materiais de preparação para o Prêmio Inovar APTEL 2026
+
+- [Identidade visual: azul, branco e cinza com UAVs em pastéis](docs/GUIA_VISUAL_SIGNATURE_BLUE.md)
+- [Roteiro de 14 minutos, pitch executivo e respostas para a banca](docs/ROTEIRO_BANCA_APTEL_2026.md)
+- [Auditoria científica e competitiva, riscos e prioridades](docs/AUDITORIA_EXIGENTE_APTEL_2026.md)
+
+**Teste de release:** [Scientific and interface regressions](https://github.com/Whatisthetimeac/AEGIS-UAV/actions/workflows/scientific-regression.yml). O workflow valida os resultados numéricos do IECON, a integridade dos arquivos visuais e a sintaxe do JavaScript. Testes de dispositivo e tiles externos complementam esses testes automatizados.
+
 ## A pergunta que orienta o projeto
 
 **Quando um enlace deixa de atender ao vídeo mais exigente, quais outros serviços continuam admissíveis pelo requisito de taxa?**
