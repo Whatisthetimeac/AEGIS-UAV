@@ -17,7 +17,6 @@ finish=read("neutral-finish.css")
 mapcss=read("map-refinement.css")
 mapjs=read("map-refinement.js")
 demo=read("competition-mode.js")
-read("docs/ROTEIRO_BANCA_APTEL_2026.md")
 read("docs/AUDITORIA_EXIGENTE_APTEL_2026.md")
 read("docs/GUIA_VISUAL_SIGNATURE_BLUE.md")
 for style in ["map-refinement.css","competition-mode.css","blue-signature.css","neutral-finish.css"]:
@@ -40,4 +39,4 @@ assert "#f4f7fb" in finish
 assert "#b4c0cc" in finish
 assert not re.search(r"\.aegis-aircraft\{--aircraft-color:[^}]*!important",design)
 print("PASS: blue-white-gray interface, six pastel UAV markers, map/demos wired")
-print("PASS: guide, jury pitch and rigorous award audit are present")
+print("PASS: visual guide and scientific audit files are present")
