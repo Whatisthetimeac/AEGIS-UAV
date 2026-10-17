@@ -7,13 +7,13 @@ O **AEGIS-UAV** é um ambiente de pesquisa e apoio ao planejamento de comunicaç
 
 [**Abrir aplicação**](https://whatisthetimeac.github.io/AEGIS-UAV/) · [**Método e contribuição**](docs/CONTRIBUICAO_E_VALIDACAO.md) · [**Dados do estudo**](data/study_20_scenarios.csv) · [**Execução MATLAB**](matlab/README.md)
 
-## Materiais de preparação para o Prêmio Inovar APTEL 2026
+## Documentação do projeto
 
-- [Identidade visual: azul, branco e cinza com UAVs em pastéis](docs/GUIA_VISUAL_SIGNATURE_BLUE.md)
-- [Roteiro de 14 minutos, pitch executivo e respostas para a banca](docs/ROTEIRO_BANCA_APTEL_2026.md)
-- [Auditoria científica e competitiva, riscos e prioridades](docs/AUDITORIA_EXIGENTE_APTEL_2026.md)
+- [Guia de identidade visual](docs/GUIA_VISUAL_SIGNATURE_BLUE.md)
+- [Contribuição científica e validação](docs/CONTRIBUICAO_E_VALIDACAO.md)
+- [Relatório técnico em PDF](docs/AEGIS_UAV_Relatorio_Tecnico_2026.pdf)
 
-**Teste de release:** [Scientific and interface regressions](https://github.com/Whatisthetimeac/AEGIS-UAV/actions/workflows/scientific-regression.yml). O workflow valida os resultados numéricos do IECON, a integridade dos arquivos visuais e a sintaxe do JavaScript. Testes de dispositivo e tiles externos complementam esses testes automatizados.
+**Verificações de código e dados:** [testes automatizados](https://github.com/Whatisthetimeac/AEGIS-UAV/actions/workflows/scientific-regression.yml).
 
 ## A pergunta que orienta o projeto
 
@@ -59,7 +59,7 @@ A cartografia de fundo é OpenStreetMap quando os tiles estão disponíveis, com
 
 Use o botão **“Ver caso MATLAB: D4, 145 s”**, no quadro **“Um mesmo enlace. Decisões diferentes.”**: a amostra modelada apresenta **13,990980 dB** de SNR. O limiar uniforme conservador de 14,1 dB rejeita os quatro perfis, enquanto a avaliação por serviço admite **C2 waypoint, C2 direct-stick e vídeo VLOS** e mantém vídeo N-VLOS rejeitado. Os controles de aeronave, instante, margem e perda atualizam o comparativo usando o mesmo motor matemático do painel.
 
-Esse exemplo é um registro da base modelada do IECON 2026, não uma medição em voo. [Veja o roteiro de 3 minutos e perguntas da banca](docs/ROTEIRO_APTEL_BANCA.md).
+Esse exemplo é um registro da base modelada do IECON 2026, não uma medição em voo.
 
 ## Teste de reprodutibilidade
 
