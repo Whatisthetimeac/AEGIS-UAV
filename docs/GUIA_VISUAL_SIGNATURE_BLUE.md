@@ -59,7 +59,7 @@ O UAV selecionado tem halo externo discreto e rótulo curto; os demais ficam com
 ## Controle de qualidade para futuras mudanças
 Ao editar o visual, nunca modificar as fórmulas de admissão ou as contagens de referência. Rodar `python tests/test_iecon_regression.py`, `node --check competition-mode.js` e `node --check map-refinement.js`. Verificar desktop, iPhone e mapa online/fallback. Se cores de status forem parecidas, adicionar texto e ícone ao invés de depender de verde/vermelho.
 
-## O que a banca deve notar
+## Objetivo de comunicação técnica
 > “O painel conecta uma necessidade concreta de missão ao limiar técnico que fundamenta a decisão, mantendo a análise reproduzível.”
 
 A estética apoia a ciência; não substitui evidência e não deve insinuar telemetria medida de campo.
