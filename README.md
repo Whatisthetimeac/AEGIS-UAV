@@ -111,6 +111,13 @@ A unidade de análise é uma amostra de enlace-posição. As amostras são tempo
 
 O [protocolo de validação](docs/CONTRIBUICAO_E_VALIDACAO.md) define a evolução para séries medidas independentes, calibração do canal e experimentos de rede e missão.
 
+
+## Auditoria independente de baselines (novo)
+
+Execute `python3 scripts/paired_baseline_audit.py` para comparar, **nas mesmas 1.806 posições modeladas**, a regra conservadora uniforme de 14,1 dB com limiares específicos por serviço, incluindo perdas adicionais de 0, 3, 6 e 10 dB e decomposição por UAV. O script valida a integridade básica das amostras, a propriedade de ordenação dos limiares e os resultados esperados no cenário de referência. O JSON emitido permite conferir as contagens sem depender da interface.
+
+**Interpretação obrigatória:** admissibilidade matemática não é entrega real de pacotes, latência, confiabilidade de missão, economia energética nem superioridade frente a roteamento adaptativo. Os 1.806 pontos pertencem a seis trajetórias modeladas e **não são 1.806 experimentos independentes**. A comparação usa um baseline propositalmente conservador; o ganho não prova superioridade frente a um baseline moderno que já diferencia serviços. Uma candidatura competitiva requer esse segundo baseline, avaliação fora da base usada para parametrização e validação operacional antes de reivindicar novidade ou impacto.
+
 ## Autoria e fontes
 
 **Ana Clara da Silva Teixeira · Instituto Militar de Engenharia.** Proponente e responsável pela demonstração AEGIS-UAV. Os dados e métodos derivados de pesquisa colaborativa mantêm a atribuição de autoria nas referências técnicas e na documentação de proveniência. AEGIS-UAV e SkyMesh são projetos distintos.
