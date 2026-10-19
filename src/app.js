@@ -1,5 +1,5 @@
 'use strict';
-/* AEGIS-UAV v7.0. Primary reproducible modeled IECON dataset; other missions synthetic. */
+/* AEGIS-UAV v7.0. Primary reproducible modeled reference dataset; other missions synthetic. */
 const $ = id => document.getElementById(id);
 const NS='http://www.w3.org/2000/svg';
 const RADIO=Object.freeze({freqHz:3.410e9,bandwidthHz:1.4e6,txDbm:10,txGainDbi:10,rxGainDbi:2,noiseDbm:-90,baseHeightM:10,uavHeightM:30});
@@ -19,15 +19,15 @@ function ieconBuiltIn(){
  for(const [name, rows] of Object.entries(window.AEGIS_IECON_REPLAY)){
    const records=rows.map(r=>({time:r[0],x:r[1],y:r[2],alt:r[3],snr:r[4]}));byUav.set(name,records);count+=records.length;
  }
- if(count!==1806 || byUav.size!==6)throw new Error('Dados IECON incompletos');
- return {byUav,count,verified:true,filename:'iecon_model_replay_1806.csv',source:'IECON MATLAB V5 geometry, continuous SNR recomputed'};
+ if(count!==1806 || byUav.size!==6)throw new Error('Dados de referência incompletos');
+ return {byUav,count,verified:true,filename:'iecon_model_replay_1806.csv',source:'MATLAB reference geometry, continuous SNR recomputed'};
 }
 function setDataModeCaption(){
  const full=state.imported?.verified;const own=state.imported && !state.imported.verified;
- const label=full?'IECON 2026 · modelo reproduzido':own?'CSV externo · procedência não verificada':'Missão demonstrativa · sintética';
+ const label=full?'Estudo de referência · modelo reproduzido':own?'CSV externo · procedência não verificada':'Missão demonstrativa · sintética';
  const detail=full?'1.806 amostras do pacote MATLAB; geografia OSM apenas como fundo ilustrativo, não é rota real. SNR contínuo; nenhuma telemetria medida.':own?'Dados externos importados localmente, não validados nem geolocalizados por esta aplicação.':'Waypoints e trajetórias sintéticos sobre cartografia OSM real; não são voos ou medições de rádio.';
  $('dataModeLabel').textContent=label;$('dataModeDetail').textContent=detail;
- $('importStatus').textContent=state.importError?state.importError:full?'REFERÊNCIA IECON · 1.806 registros modelados · 6 UAVs · 301 instantes':own?`CSV externo · ${state.imported.count} linhas · origem não verificada`:'Cenário sintético local · modelo de propagação analítico';
+ $('importStatus').textContent=state.importError?state.importError:full?'REFERÊNCIA MODELADA · 1.806 registros modelados · 6 UAVs · 301 instantes':own?`CSV externo · ${state.imported.count} linhas · origem não verificada`:'Cenário sintético local · modelo de propagação analítico';
  $('roundingInfo').textContent=state.legacyRounding&&full?'Diagnóstico: arredondamento ativo. Contagens são recalculadas nas condições selecionadas.':'SNR contínuo: referência primária para a comparação de políticas.';
 }
 
