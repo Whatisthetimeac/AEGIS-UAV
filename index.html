@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#08111f">
-  <meta name="description" content="AEGIS-UAV: demonstrador auditável de admissibilidade de taxa em enlaces para missões com drones. Pesquisa-base IECON 2026.">
+  <meta name="description" content="AEGIS-UAV: demonstrador auditável de admissibilidade de taxa em enlaces para missões com drones. Resultados de simulação reproduzíveis e decisões auditáveis.">
   <title>AEGIS-UAV | Mission Intelligence</title>
   <link rel="icon" href="src/assets/favicon.svg" type="image/svg+xml">
   <style>
@@ -69,8 +69,8 @@ html{scroll-padding-top:24px}body,.main{background:#0a1112}.main{padding:0 30px 
       <a href="#audit" class="navitem"><span>≡</span> Auditoria e dados</a>
     </nav>
     <div class="side-bottom">
-      <div class="status-card"><i class="led"></i><div><b>Modelo de pesquisa</b><small>1.806 avaliações IECON reproduzidas</small></div></div>
-      <div class="buildline">AEGIS-UAV / v7.0<br>IECON 2026 • APTEL 2026</div>
+      <div class="status-card"><i class="led"></i><div><b>Modelo de pesquisa</b><small>1.806 avaliações modeladas reproduzidas</small></div></div>
+      <div class="buildline">AEGIS-UAV / v7.0<br>VALIDAÇÃO REPRODUZÍVEL</div>
     </div>
   </aside>
   <main class="main">
@@ -79,12 +79,12 @@ html{scroll-padding-top:24px}body,.main{background:#0a1112}.main{padding:0 30px 
       <div class="top-actions"><span class="meta-pill"><i class="led"></i> REPRODUÇÃO + SIMULAÇÃO</span><span class="meta-pill soft">DECISÃO AUDITÁVEL</span><button id="quickReport" class="primary-btn">↓ Exportar auditoria</button></div>
     </header>
     <section class="hero" id="overview">
-      <div><div class="eyebrow">APTEL INOVAR 2026 / INTELIGÊNCIA DE COMUNICAÇÃO UAV</div><h1>Cada missão exige<br><span>uma decisão melhor.</span></h1><p>Saiba quais serviços seu enlace pode atender. Compare controle e vídeo sob o mesmo sinal, explore missões e transforme requisitos em decisões rastreáveis.</p></div>
-      <div class="hero-right"><button class="primary-btn" id="demoBtn">▶ Demonstração guiada</button><b id="missionClock">T + 03:45</b><span>BASE MATEMÁTICA IECON 2026</span></div>
+      <div><div class="eyebrow">INTELIGÊNCIA DE COMUNICAÇÃO PARA MISSÕES UAV</div><h1>Cada missão exige<br><span>uma decisão melhor.</span></h1><p>Saiba quais serviços seu enlace pode atender. Compare controle e vídeo sob o mesmo sinal, explore missões e transforme requisitos em decisões rastreáveis.</p></div>
+      <div class="hero-right"><button class="primary-btn" id="demoBtn">▶ Demonstração guiada</button><b id="missionClock">T + 03:45</b><span>BASE MATEMÁTICA REPRODUZÍVEL</span></div>
     </section>
-    <section class="mission-selector"><div class="mission-select-left"><label for="missionSelect">CENÁRIO DE MISSÃO</label><select id="missionSelect"><option value="4" selected>00 · IECON 2026 · 1.806 avaliações reproduzidas</option><option value="0">01 · Inspeção de infraestrutura · Rio</option><option value="1">02 · Monitoramento costeiro · Guanabara</option><option value="2">03 · Busca e resposta · Niterói</option><option value="3">04 · Mapeamento urbano · São Gonçalo</option></select><span id="missionDescription"></span></div><div class="mission-tools"><button id="waypointMode" class="outline-btn">＋ Adicionar waypoint</button><button id="geojsonBtn" class="outline-btn">↓ Plano GeoJSON</button></div></section>
-    <div class="disclaimer"><span class="info-icon">i</span><span><b id="dataModeLabel">IECON 2026 · geometria esquemática modelada</b> <span id="dataModeDetail">O sistema reproduz 1.806 avaliações modeladas do IECON 2026 com SNR contínuo. A cartografia OpenStreetMap contextualiza os cenários; as rotas são simuladas e identificadas como tais.</span></span></div>
-    <section class="proof-ribbon" aria-label="Resultados científicos IECON 2026">
+    <section class="mission-selector"><div class="mission-select-left"><label for="missionSelect">CENÁRIO DE MISSÃO</label><select id="missionSelect"><option value="4" selected>00 · Estudo de referência · 1.806 avaliações</option><option value="0">01 · Inspeção de infraestrutura · Rio</option><option value="1">02 · Monitoramento costeiro · Guanabara</option><option value="2">03 · Busca e resposta · Niterói</option><option value="3">04 · Mapeamento urbano · São Gonçalo</option></select><span id="missionDescription"></span></div><div class="mission-tools"><button id="waypointMode" class="outline-btn">＋ Adicionar waypoint</button><button id="geojsonBtn" class="outline-btn">↓ Plano GeoJSON</button></div></section>
+    <div class="disclaimer"><span class="info-icon">i</span><span><b id="dataModeLabel">estudo de referência · geometria esquemática modelada</b> <span id="dataModeDetail">O sistema reproduz 1.806 avaliações modeladas do estudo de referência com SNR contínuo. A cartografia OpenStreetMap contextualiza os cenários; as rotas são simuladas e identificadas como tais.</span></span></div>
+    <section class="proof-ribbon" aria-label="Resultados científicos estudo de referência">
       <div class="proof-ribbon-item lead"><small>CONTRIBUIÇÃO APLICADA</small><strong>Decisão adequada a cada serviço</strong><span>Critérios rastreáveis para controle e vídeo UAV</span></div>
       <div class="proof-ribbon-item"><small>AVALIAÇÕES MODELADAS</small><strong>1.806</strong><span>referência IECON · seis trajetórias</span></div>
       <div class="proof-ribbon-item"><small>GANHO NA CLASSIFICAÇÃO</small><strong>+13,51 p.p.</strong><span>cenário principal · por perfil</span></div>
@@ -113,7 +113,7 @@ html{scroll-padding-top:24px}body,.main{background:#0a1112}.main{padding:0 30px 
         <label>Perturbação do limiar <output id="deltaLabel">0 dB</output><input id="deltaSlider" type="range" min="-1" max="1" step="0.25" value="0"></label>
       </div><div class="data-import"><label for="matlabCsv">◫ Importar séries externas (CSV)</label><input type="file" id="matlabCsv" accept=".csv,text/csv"><span id="importStatus">Modo IECON · 1.806 posições modeladas do pacote MATLAB · SNR contínuo</span><button id="clearCsv" type="button" class="outline-btn small">Limpar CSV</button></div><div class="model-option"><label><input id="legacyRounding" type="checkbox"> Comparar arredondamento legado do MATLAB (diagnóstico)</label><span id="roundingInfo">Referência primária: SNR contínuo, sem arredondamento.</span></div><div class="control-actions"><button id="playBtn" class="primary-btn">▶ Reproduzir missão</button><button id="resetBtn" class="outline-btn">↻ Restaurar</button><button id="compareBtn" class="outline-btn">↔ Comparar</button></div><div class="service-decision-head"><b>Perfil / taxa exigida</b><b>Uniforme</b><b>Por serviço</b></div><div id="serviceDecisions" class="service-decisions"></div></div></article>
       <article class="panel comparison-panel"><div class="panel-head"><h2><span class="panel-icon">▥</span> Decisões neste instante</h2><span class="panel-label">mesmo SNR, limiares distintos</span></div><div class="panel-body"><div class="chart-key"><span><i class="swatch orange"></i> Uniforme</span><span><i class="swatch teal"></i> Orientada ao serviço</span></div><canvas id="policyChart" aria-label="Comparação das decisões binárias de admissão"></canvas><div class="explain-box" id="decisionExplanation"></div><div class="tiny-legend">Classificação de taxa, não desempenho de pacotes ou qualidade de serviço ponta a ponta.</div></div></article>
-      <article class="panel kpi-panel" id="evidence"><div class="panel-head"><h2><span class="panel-icon">◈</span> Evidência científica</h2><span class="panel-label">IECON 2026 · manuscrito</span></div><div class="evidence-grid"><div><strong>1.806</strong><span>amostras pareadas de enlace-posição</span></div><div><strong>244</strong><span>rejeições conservadoras evitadas por perfil menos exigente</span></div><div><strong>+13,51</strong><span>pontos percentuais no cenário principal</span></div><div><strong>0,00</strong><span>ganho do perfil mais exigente por construção</span></div></div><div class="evidence-foot"><b>86,49% → 100,00%</b><span>Resultado classificado para os 3 serviços menos exigentes, no cenário principal.</span></div><div class="evidence-note">Reprodução verificada a partir das coordenadas esquemáticas incluídas no pacote MATLAB; seus valores coincidem com o artigo revisado. Os demais cenários usam geometria sintética distinta.</div></article>
+      <article class="panel kpi-panel" id="evidence"><div class="panel-head"><h2><span class="panel-icon">◈</span> Evidência científica</h2><span class="panel-label">estudo de referência · manuscrito</span></div><div class="evidence-grid"><div><strong>1.806</strong><span>amostras pareadas de enlace-posição</span></div><div><strong>244</strong><span>rejeições conservadoras evitadas por perfil menos exigente</span></div><div><strong>+13,51</strong><span>pontos percentuais no cenário principal</span></div><div><strong>0,00</strong><span>ganho do perfil mais exigente por construção</span></div></div><div class="evidence-foot"><b>86,49% → 100,00%</b><span>Resultado classificado para os 3 serviços menos exigentes, no cenário principal.</span></div><div class="evidence-note">Reprodução verificada a partir das coordenadas esquemáticas incluídas no pacote MATLAB; seus valores coincidem com o artigo revisado. Os demais cenários usam geometria sintética distinta.</div></article>
     </section>
 
     <section id="research" class="research-section">
@@ -139,7 +139,7 @@ html{scroll-padding-top:24px}body,.main{background:#0a1112}.main{padding:0 30px 
       <article class="panel audit-panel"><div class="panel-head"><h2><span class="panel-icon">≡</span> Trilha de decisão</h2><span class="panel-label">rastreabilidade por serviço</span></div><div class="panel-body"><div class="table-scroll"><table><thead><tr><th>Serviço</th><th>Taxa</th><th>Limiar individual</th><th>Uniforme</th><th>Por serviço</th><th>Interpretação</th></tr></thead><tbody id="auditRows"></tbody></table></div><div class="control-actions"><button id="jsonBtn" class="outline-btn">↓ Registro JSON</button><button id="csvBtn" class="outline-btn">↓ Instante CSV</button><button id="seriesBtn" class="outline-btn">↓ Trajetórias CSV</button><button id="printBtn" class="outline-btn">⎙ Imprimir</button></div></div></article>
       <article class="panel method-panel"><div class="panel-head"><h2><span class="panel-icon">⊡</span> Método e rastreabilidade</h2><span class="panel-label">reprodutibilidade</span></div><div class="panel-body notes"><p><b>Parâmetros-base.</b> 3,410 GHz · 1,4 MHz · potência 10 dBm · ganhos 10/2 dBi · ruído −90 dBm.</p><p><b>Admissão.</b> Um fluxo passa quando SNR ≥ limiar do serviço + perturbação + margem. O controle usa 14,1 dB para todos.</p><p><b>Perfis.</b> C2: −6,7 dB; vídeo VLOS: 5,9 dB; vídeo N-VLOS: 14,1 dB.</p><p><b>Reprodução IECON.</b> O modo inicial carrega 1.806 posições esquemáticas da base MATLAB V5 fornecida e recalcula SNR contínuo: 1.562 admissões com limiar de 14,1 dB, contra 1.581 quando se aplica arredondamento legado. Nenhum deles é resultado de voo físico. Os mapas usam âncora geográfica ilustrativa, sem coordenadas de campo. Veja <a href="data/iecon_replay_provenance.json" target="_blank" rel="noopener">proveniência e checksums</a>.</p><p><b>Integração MATLAB.</b> Execute <code>matlab/reproduce_iecon_results.m</code> para recomputar a série a partir do CSV de geometria, ou gere um cenário pelo script <code>matlab/aegis_uav_simulate.m</code> ou importe registros com as colunas <code>uav,time_s,x_m,y_m</code> e <code>snr_db</code> opcional. A importação é local e não comprova validação do modelo, mesmo quando contém medidas externas.</p><p><b>Limitação.</b> Sem SINR/interferência, protocolo, PDR, latência ou voo físico. As trajetórias são esquemáticas ou sintéticas. A visualização geográfica não é evidência de cobertura de rádio nem trajeto autorizado.</p><a href="docs/AEGIS_UAV_Relatorio_Tecnico_2026.pdf" target="_blank" rel="noopener">↗ Artigo técnico (PDF)</a></div></article>
     </section>
-    <footer><span>Ana Clara da Silva Teixeira · IME</span><span>AEGIS-UAV · Protótipo individual de demonstração</span><span>Base científica com coautoria: IECON 2026 · <a href="https://github.com/Whatisthetimeac/AEGIS-UAV" target="_blank" rel="noopener">Código e documentação ↗</a></span></footer>
+    <footer><span>Ana Clara da Silva Teixeira · IME</span><span>AEGIS-UAV · Protótipo individual de demonstração</span><span>Base científica com coautoria: estudo de referência · <a href="https://github.com/Whatisthetimeac/AEGIS-UAV" target="_blank" rel="noopener">Código e documentação ↗</a></span></footer>
   </main>
  </div>
  <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -164,7 +164,7 @@ window.AEGIS_IECON_REPLAY={"A1":[[0,298.5,90.0,30.0,19.0003141],[1,303.10701,91.
 
 </script><script>
 'use strict';
-/* AEGIS-UAV v7.0. Primary reproducible modeled IECON dataset; other missions synthetic. */
+/* AEGIS-UAV v7.0. Primary reproducible modeled reference dataset; other missions synthetic. */
 const $ = id => document.getElementById(id);
 const NS='http://www.w3.org/2000/svg';
 const RADIO=Object.freeze({freqHz:3.410e9,bandwidthHz:1.4e6,txDbm:10,txGainDbi:10,rxGainDbi:2,noiseDbm:-90,baseHeightM:10,uavHeightM:30});
@@ -184,15 +184,15 @@ function ieconBuiltIn(){
  for(const [name, rows] of Object.entries(window.AEGIS_IECON_REPLAY)){
    const records=rows.map(r=>({time:r[0],x:r[1],y:r[2],alt:r[3],snr:r[4]}));byUav.set(name,records);count+=records.length;
  }
- if(count!==1806 || byUav.size!==6)throw new Error('Dados IECON incompletos');
- return {byUav,count,verified:true,filename:'iecon_model_replay_1806.csv',source:'IECON MATLAB V5 geometry, continuous SNR recomputed'};
+ if(count!==1806 || byUav.size!==6)throw new Error('Dados de referência incompletos');
+ return {byUav,count,verified:true,filename:'iecon_model_replay_1806.csv',source:'MATLAB reference geometry, continuous SNR recomputed'};
 }
 function setDataModeCaption(){
  const full=state.imported?.verified;const own=state.imported && !state.imported.verified;
- const label=full?'IECON 2026 · modelo reproduzido':own?'CSV externo · procedência não verificada':'Missão demonstrativa · sintética';
+ const label=full?'Estudo de referência · modelo reproduzido':own?'CSV externo · procedência não verificada':'Missão demonstrativa · sintética';
  const detail=full?'1.806 amostras do pacote MATLAB; geografia OSM apenas como fundo ilustrativo, não é rota real. SNR contínuo; nenhuma telemetria medida.':own?'Dados externos importados localmente, não validados nem geolocalizados por esta aplicação.':'Waypoints e trajetórias sintéticos sobre cartografia OSM real; não são voos ou medições de rádio.';
  $('dataModeLabel').textContent=label;$('dataModeDetail').textContent=detail;
- $('importStatus').textContent=state.importError?state.importError:full?'REFERÊNCIA IECON · 1.806 registros modelados · 6 UAVs · 301 instantes':own?`CSV externo · ${state.imported.count} linhas · origem não verificada`:'Cenário sintético local · modelo de propagação analítico';
+ $('importStatus').textContent=state.importError?state.importError:full?'REFERÊNCIA MODELADA · 1.806 registros modelados · 6 UAVs · 301 instantes':own?`CSV externo · ${state.imported.count} linhas · origem não verificada`:'Cenário sintético local · modelo de propagação analítico';
  $('roundingInfo').textContent=state.legacyRounding&&full?'Diagnóstico: arredondamento ativo. Contagens são recalculadas nas condições selecionadas.':'SNR contínuo: referência primária para a comparação de políticas.';
 }
 
