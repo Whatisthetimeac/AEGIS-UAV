@@ -23,7 +23,7 @@ C2 por waypoints requer 0,8 kbit/s no perfil adotado; vídeo N-VLOS requer 4 Mbi
 
 ## Evidência de referência
 
-A base de pesquisa é o estudo **“From Uniform Thresholds to Service-Aware Link Admission in UAV Missions: A Reproducible MATLAB Study”**, aceito no IECON 2026. A comparação mantém potência, banda, geometria e SNR constantes entre as políticas.
+A base experimental reúne trajetórias e avaliações modeladas reproduzíveis. A comparação mantém potência, banda, geometria e SNR constantes entre as políticas. O conjunto de referência é identificado pelos arquivos de proveniência e pelas fontes científicas correspondentes.
 
 | Cenário principal, SNR contínuo | Resultado |
 |---|---:|
@@ -42,7 +42,7 @@ A contribuição é a **classificação consistente com o requisito de cada serv
 - **Mapa de missão:** cartografia OpenStreetMap, drones com orientação de movimento, seleção de aeronaves e planejamento com waypoints numerados.
 - **Laboratório de decisão:** inspeção por instante, perda adicional, margem, perturbação de limiar e comparação com o diagnóstico de arredondamento legado.
 - **Análise da missão completa:** contagens por serviço, diferença em pontos percentuais, distribuição por trajetória e matriz de sensibilidade.
-- **Estudo em lote:** quatro missões sintéticas e a referência IECON, cruzadas com quatro perdas adicionais; 20 condições e 80 linhas de resultados por perfil.
+- **Estudo em lote:** quatro missões sintéticas e o estudo de referência, cruzadas com quatro perdas adicionais; 20 condições e 80 linhas de resultados por perfil.
 - **Rastreabilidade:** cadeia taxa → eficiência espectral → nível → limiar, registros JSON, decisões CSV e planejamento GeoJSON.
 - **Fluxo MATLAB:** geração de trajetórias, reanálise da referência e execução local integrada, quando o runtime está instalado.
 
@@ -59,7 +59,7 @@ A cartografia de fundo é OpenStreetMap quando os tiles estão disponíveis, com
 
 Use o botão **“Ver caso MATLAB: D4, 145 s”**, no quadro **“Um mesmo enlace. Decisões diferentes.”**: a amostra modelada apresenta **13,990980 dB** de SNR. O limiar uniforme conservador de 14,1 dB rejeita os quatro perfis, enquanto a avaliação por serviço admite **C2 waypoint, C2 direct-stick e vídeo VLOS** e mantém vídeo N-VLOS rejeitado. Os controles de aeronave, instante, margem e perda atualizam o comparativo usando o mesmo motor matemático do painel.
 
-Esse exemplo é um registro da base modelada do IECON 2026, não uma medição em voo.
+Esse exemplo é um registro da base modelada de referência, não uma medição em voo.
 
 ## Teste de reprodutibilidade
 
@@ -113,6 +113,6 @@ O [protocolo de validação](docs/CONTRIBUICAO_E_VALIDACAO.md) define a evoluç�
 
 ## Autoria e fontes
 
-**Ana Clara da Silva Teixeira · Instituto Militar de Engenharia.** Proponente e responsável pela demonstração AEGIS-UAV. A pesquisa IECON de origem é coautorada; seus créditos permanecem preservados. AEGIS-UAV e SkyMesh são projetos distintos.
+**Ana Clara da Silva Teixeira · Instituto Militar de Engenharia.** Proponente e responsável pela demonstração AEGIS-UAV. Os dados e métodos derivados de pesquisa colaborativa mantêm a atribuição de autoria nas referências técnicas e na documentação de proveniência. AEGIS-UAV e SkyMesh são projetos distintos.
 
 Perfis de serviço: 3GPP TS 22.125 V19.2.0, conforme o manuscrito. Abstração SNR–eficiência espectral: tabela de 15 níveis do framework de referência documentado no estudo. Geometria: [proveniência da base](data/iecon_replay_provenance.json). Cartografia: © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). Dados e componentes de terceiros mantêm suas respectivas condições de uso.
